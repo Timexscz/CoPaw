@@ -36,7 +36,10 @@ pip install copaw
 
 ```
 docker pull agentscope/copaw:latest
-docker run -p 8088:8088 -v copaw-data:/app/working agentscope/copaw:latest
+docker run -p 127.0.0.1:8088:8088 \
+  -v copaw-data:/app/working \
+  -v copaw-secrets:/app/working.secret \
+  agentscope/copaw:latest
 ```
 
 > **⚠️ Windows 企业版 LTSC 用户特别提示**
@@ -90,7 +93,10 @@ pip install -e .
 
 ```
 docker pull agentscope/copaw:latest
-docker run -p 8088:8088 -v copaw-data:/app/working agentscope/copaw:latest
+docker run -p 127.0.0.1:8088:8088 \
+  -v copaw-data:/app/working \
+  -v copaw-secrets:/app/working.secret \
+  agentscope/copaw:latest
 ```
 
 升级后重启服务 copaw app。
@@ -122,12 +128,78 @@ CoPaw 已开源，官方仓库地址：
 
 ### 如何配置模型
 
-在控制台进入 **设置 → 模型** 中进行配置，详情请见文档 [控制台 → 模型](https://copaw.agentscope.io/docs/console#%E6%A8%A1%E5%9E%8B)：
+在控制台进入 **设置 → 模型** 中进行配置，详情请见文档 [模型](https://copaw.agentscope.io/docs/models)：
 
 - 云端模型：填写提供商 API Key（如 ModelScope、DashScope 或自定义提供商），再选择活跃模型。
 - 本地模型：支持 `llama.cpp`、`MLX` 和 Ollama。下载后可在同页选择活跃模型。
 
 命令行也可使用 `copaw models` 系列命令完成配置、下载和切换，详情请见文档 [CLI → 模型与环境变量 → copaw models](https://copaw.agentscope.io/docs/cli#copaw-models)。
+
+### 使用 Ollama / LM Studio 部署的模型时，为什么 CoPaw 无法完成多轮交互、复杂工具调用，或记不住之前的指令？
+
+这类问题通常不是 CoPaw 本身异常，而是**模型上下文长度配置过小**导致的。
+
+当你使用 Ollama 或 LM Studio 部署本地模型时，如果模型的 `context length` 设置太低，CoPaw 在以下场景中就可能表现异常：
+
+- 无法稳定完成多轮对话
+- 执行复杂工具调用时中途丢失上下文
+- 记不住前面几轮中已经给出的要求或指令
+- 长任务执行到一半开始偏离目标
+
+**解决方法：**
+
+- 运行 CoPaw 前，请将模型的 `context length` 设置为**至少 32K**
+- 如果任务较复杂、工具调用较多或对话轮次较长，实际可能需要设置到**高于 32K**
+
+> ⚠️ **运行 CoPaw 前必须将上下文长度设为 32K 以上**
+>
+> 对于 Ollama 和 LM Studio 部署的本地模型，如果要让 CoPaw 正常完成多轮交互、复杂工具调用和长上下文任务，通常必须提供 **32K 或更高** 的上下文长度；在更复杂的场景下，可能还需要进一步提高。
+>
+> 注意，更大的上下文窗口会显著增加显存 / 内存占用和计算开销，请确认你的本地机器能够支持。
+
+**Ollama 配置示意图：**
+
+![Ollama context length 配置示意图](https://img.alicdn.com/imgextra/i3/O1CN01JrqRjE1l6FxuO3IMl_!!6000000004769-2-tps-699-656.png)
+
+**LM Studio 配置示意图：**
+
+![LM Studio context length 配置示意图](https://img.alicdn.com/imgextra/i4/O1CN01LWyG6o21E4Zovqv4G_!!6000000006952-2-tps-923-618.png)
+
+### 定时任务错误排查
+
+在控制台进入 **控制 → 定时任务** ，在这里可以创建和管理定时任务。
+
+![cron](https://img.alicdn.com/imgextra/i4/O1CN01hNk4od1uuTwGRT2sk_!!6000000006097-2-tps-3802-1968.png)
+
+最方便的定时任务创建方式是，在你想要获取定时任务返回结果的频道，与CoPaw对话，让CoPaw帮你创建一个定时任务。例如，可以直接与CoPaw对话：“帮我创建一个定时任务，每隔五分钟提醒我喝水。”之后可以在控制台中看到状态为已启用的定时任务。
+
+如果定时任务没有正常启动，可以按照以下几个步骤排查：
+
+1. 首先确认 CoPaw 服务是在正常运行中的。
+
+2. 定时任务的 **启用状态** 是否为 **已启动**。
+
+   ![enable](https://img.alicdn.com/imgextra/i1/O1CN01gVVf081o6ClZVBrhD_!!6000000005175-2-tps-3020-754.png)
+
+3. 定时任务的 **DispatchChannel** 是否被正确地设置为了想要获取返回结果的频道，如 console、dingtalk、feishu、discord、imessage 等。
+
+   ![channel](https://img.alicdn.com/imgextra/i4/O1CN01xUaLG61lVRkO7ZfY4_!!6000000004824-2-tps-3020-754.png)
+
+4. **DispatchTargetUserID** 和 **DispatchTargetSessionID** 的值是否设置正确。
+
+   ![id](https://img.alicdn.com/imgextra/i1/O1CN014e0BHN1CFPKDS7Kd7_!!6000000000051-2-tps-3020-754.png)
+
+   核查方式为，在控制台进入 **控制 → 会话**，找到刚刚创建定时任务的会话。如果想要定时任务返回到这个会话中，需要核查 **UserID** 和 **SessionID** 是否与定时任务的 **DispatchTargetUserID** 和 **DispatchTargetSessionID** 相同。
+
+   ![id](https://img.alicdn.com/imgextra/i3/O1CN01ZmgYTC1wiEZx7rOjK_!!6000000006341-2-tps-3020-928.png)
+
+5. 如果觉得定时任务的触发间隔时间不对，需要确认一下定时任务的 **执行时间（Cron）**是否正确。
+
+   ![cron](https://img.alicdn.com/imgextra/i1/O1CN01WpN8l51kKANPSlK8r_!!6000000004664-2-tps-3020-762.png)
+
+6. 排查结束后，如果想确认一下定时任务是否创建成功，且能成功触发，可以点击 **立即执行**，若成功创建，则可在对应频道收到回复。或者也可以直接与 CoPaw 对话：“帮我触发一下刚刚创建的提醒喝水定时任务”。
+
+   ![exec](https://img.alicdn.com/imgextra/i4/O1CN017tycJh1ZPhO5XMuAu_!!6000000003187-2-tps-3020-762.png)
 
 ### 如何管理Skill
 

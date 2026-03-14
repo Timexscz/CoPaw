@@ -3,6 +3,7 @@
 import asyncio
 import mimetypes
 import os
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -30,7 +31,9 @@ from .crons.repo.json_repo import JsonJobRepository
 from .crons.manager import CronManager
 from .runner.manager import ChatManager
 from .routers import router as api_router
+from .routers.voice import voice_router
 from ..envs import load_envs_into_environ
+from ..providers.provider_manager import ProviderManager
 
 # Apply log level on load so reload child process gets same level as CLI.
 logger = setup_logger(os.environ.get(LOG_LEVEL_ENV, "info"))
@@ -60,6 +63,7 @@ agent_app = AgentApp(
 async def lifespan(
     app: FastAPI,
 ):  # pylint: disable=too-many-statements,too-many-branches
+    startup_start_time = time.time()
     add_copaw_file_handler(WORKING_DIR / "copaw.log")
     await runner.start()
 
@@ -69,10 +73,12 @@ async def lifespan(
     if hasattr(config, "mcp"):
         try:
             await mcp_manager.init_from_config(config.mcp)
-            runner.set_mcp_manager(mcp_manager)
             logger.debug("MCP client manager initialized")
-        except Exception:
+        except BaseException as e:
+            if isinstance(e, (KeyboardInterrupt, SystemExit)):
+                raise
             logger.exception("Failed to initialize MCP manager")
+    runner.set_mcp_manager(mcp_manager)
 
     # --- channel connector init/start (from config.json) ---
     channel_manager = ChannelManager.from_config(
@@ -118,8 +124,19 @@ async def lifespan(
             )
             await mcp_watcher.start()
             logger.debug("MCP config watcher started")
-        except Exception:
+        except BaseException as e:
+            if isinstance(e, (KeyboardInterrupt, SystemExit)):
+                raise
             logger.exception("Failed to start MCP watcher")
+
+    # Inject channel_manager into approval service so it can
+    # proactively push approval messages to channels like DingTalk.
+    from .approvals import get_approval_service
+
+    get_approval_service().set_channel_manager(channel_manager)
+
+    # --- Model provider manager (non-reloadable, in-memory) ---
+    provider_manager = ProviderManager.get_instance()
 
     # expose to endpoints
     app.state.runner = runner
@@ -129,6 +146,7 @@ async def lifespan(
     app.state.config_watcher = config_watcher
     app.state.mcp_manager = mcp_manager
     app.state.mcp_watcher = mcp_watcher
+    app.state.provider_manager = provider_manager
 
     _restart_task: asyncio.Task | None = None
 
@@ -385,6 +403,11 @@ async def lifespan(
 
     setattr(runner, "_restart_callback", _restart_services)
 
+    startup_elapsed = time.time() - startup_start_time
+    logger.debug(
+        f"Application startup completed in {startup_elapsed:.3f} seconds",
+    )
+
     try:
         yield
     finally:
@@ -499,6 +522,10 @@ app.include_router(
     prefix="/api/agent",
     tags=["agent"],
 )
+
+# Voice channel: Twilio-facing endpoints at root level (not under /api/).
+# POST /voice/incoming, WS /voice/ws, POST /voice/status-callback
+app.include_router(voice_router, tags=["voice"])
 
 # Mount console: root static files (logo.png etc.) then assets, then SPA
 # fallback.
