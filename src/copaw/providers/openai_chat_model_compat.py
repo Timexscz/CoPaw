@@ -8,9 +8,26 @@ from datetime import datetime
 from types import SimpleNamespace
 from typing import Any, AsyncGenerator, Type
 
+from agentscope.message import TextBlock, ThinkingBlock, ToolUseBlock
 from agentscope.model import OpenAIChatModel
+from agentscope.model._model_usage import ChatUsage
 from agentscope.model._model_response import ChatResponse
 from pydantic import BaseModel
+
+from ..local_models.tag_parser import (
+    extract_thinking_from_text,
+    parse_tool_calls_from_text,
+    text_contains_think_tag,
+    text_contains_tool_call_tag,
+)
+
+
+def _json_loads_safe(s: str) -> dict:
+    """Safely parse JSON string, returning empty dict on failure."""
+    try:
+        return json.loads(s)
+    except (json.JSONDecodeError, TypeError):
+        return {}
 
 
 def _clone_with_overrides(obj: Any, **overrides: Any) -> Any:
