@@ -6,6 +6,7 @@ This module handles:
 - Message content manipulation
 - Message validation
 """
+import asyncio
 import logging
 import os
 import urllib.parse
@@ -118,7 +119,68 @@ def _media_type_from_path(path: str) -> str:
         ".wav": "audio/wav",
         ".mp3": "audio/mp3",
         ".opus": "audio/opus",
+        ".ogg": "audio/ogg",
+        ".flac": "audio/flac",
+        ".m4a": "audio/mp4",
+        ".aac": "audio/aac",
     }.get(ext, "audio/octet-stream")
+
+
+# Extensions accepted by the agentscope OpenAIChatFormatter
+_FORMATTER_SUPPORTED_AUDIO_EXTS = {".wav", ".mp3"}
+
+
+def _convert_audio_to_wav(src_path: str) -> Optional[str]:
+    """Convert an audio file to .wav using ffmpeg if the extension is not
+    natively supported by the LLM formatter.
+
+    Returns the path to the converted .wav file, or None if conversion
+    failed or was not needed.
+    """
+    ext = (os.path.splitext(src_path)[1] or "").lower()
+    if ext in _FORMATTER_SUPPORTED_AUDIO_EXTS:
+        return None  # already supported, no conversion needed
+
+    import subprocess
+    import shutil
+
+    if not shutil.which("ffmpeg"):
+        logger.warning(
+            "ffmpeg not found; cannot convert %s audio to wav. "
+            "Install ffmpeg to enable audio format conversion.",
+            ext,
+        )
+        return None
+
+    dst_path = os.path.splitext(src_path)[0] + ".wav"
+    try:
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                src_path,
+                "-ar",
+                "16000",
+                "-ac",
+                "1",
+                dst_path,
+            ],
+            capture_output=True,
+            timeout=30,
+            check=True,
+        )
+        logger.debug("Converted audio %s -> %s", src_path, dst_path)
+        return dst_path
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+        stderr = getattr(e, "stderr", b"") or b""
+        logger.warning(
+            "Audio conversion failed for %s: %s\nstderr: %s",
+            src_path,
+            e,
+            stderr.decode(errors="replace"),
+        )
+        return None
 
 
 def _update_block_with_local_path(
@@ -155,6 +217,62 @@ def _handle_download_failure(block_type: str) -> Optional[dict]:
         }
     logger.debug("Failed to download %s block, keeping original", block_type)
     return None
+
+
+async def _process_audio_block(
+    message_content: list,
+    index: int,
+    local_path: str,
+    block: dict,
+) -> None:
+    """Handle an audio block according to the configured audio_mode.
+
+    Modes:
+      - ``"auto"`` (default): try transcription first, fall back to native
+        audio block (with ffmpeg conversion if available).
+      - ``"transcribe"``: always transcribe, never keep audio blocks.
+      - ``"native"``: always keep audio block (convert via ffmpeg if needed).
+    """
+    from .audio_transcription import transcribe_audio
+
+    audio_mode = load_config().agents.audio_mode
+
+    if audio_mode == "native":
+        converted = await asyncio.to_thread(_convert_audio_to_wav, local_path)
+        audio_path = converted or local_path
+        block["source"] = {
+            "type": "url",
+            "url": Path(audio_path).as_uri(),
+            "media_type": _media_type_from_path(audio_path),
+        }
+        return
+
+    # "transcribe" or "auto": attempt transcription.
+    text = await transcribe_audio(local_path)
+    if text:
+        message_content[index] = {
+            "type": "text",
+            "text": f"[Voice message]: {text}",
+        }
+        return
+
+    if audio_mode == "transcribe":
+        # Transcription failed but user explicitly chose transcribe-only.
+        message_content[index] = {
+            "type": "text",
+            "text": "[Voice message]: (transcription unavailable)",
+        }
+        return
+
+    # "auto" fallback: transcription failed, try native audio with
+    # optional ffmpeg conversion.
+    converted = await asyncio.to_thread(_convert_audio_to_wav, local_path)
+    audio_path = converted or local_path
+    block["source"] = {
+        "type": "url",
+        "url": Path(audio_path).as_uri(),
+        "media_type": _media_type_from_path(audio_path),
+    }
 
 
 async def _process_single_block(
@@ -201,11 +319,22 @@ async def _process_single_block(
         local_path = await _process_single_file_block(source, filename)
 
         if local_path:
-            message_content[index] = _update_block_with_local_path(
-                block,
-                block_type,
-                local_path,
-            )
+            if block_type == "audio":
+                # Audio blocks need transcription or format conversion
+                # depending on the configured audio_mode.
+                _update_block_with_local_path(block, block_type, local_path)
+                await _process_audio_block(
+                    message_content,
+                    index,
+                    local_path,
+                    block,
+                )
+            else:
+                message_content[index] = _update_block_with_local_path(
+                    block,
+                    block_type,
+                    local_path,
+                )
             logger.debug(
                 "Updated %s block with local path: %s",
                 block_type,

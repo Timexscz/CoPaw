@@ -36,6 +36,7 @@ import {
   Copy,
   Check,
   BarChart3,
+  Mic,
 } from "lucide-react";
 import api from "../api";
 import styles from "./index.module.less";
@@ -66,6 +67,7 @@ const KEY_TO_PATH: Record<string, string> = {
   "agent-config": "/agent-config",
   security: "/security",
   "token-usage": "/token-usage",
+  "voice-transcription": "/voice-transcription",
 };
 
 const UPDATE_MD: Record<string, string> = {
@@ -255,8 +257,8 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
     const lang = i18n.language?.startsWith("zh")
       ? "zh"
       : i18n.language?.startsWith("ru")
-      ? "ru"
-      : "en";
+        ? "ru"
+        : "en";
     const faqLang = lang === "zh" ? "zh" : "en";
     const url = `https://copaw.agentscope.io/docs/faq.${faqLang}.md`;
     fetch(url, { cache: "no-cache" })
@@ -268,7 +270,7 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
         setUpdateMarkdown(
           match && lang !== "ru"
             ? match[0].trim()
-            : UPDATE_MD[lang] ?? UPDATE_MD.en,
+            : (UPDATE_MD[lang] ?? UPDATE_MD.en),
         );
       })
       .catch(() => {
@@ -352,6 +354,11 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
           key: "token-usage",
           label: t("nav.tokenUsage"),
           icon: <BarChart3 size={16} />,
+        },
+        {
+          key: "voice-transcription",
+          label: t("nav.voiceTranscription"),
+          icon: <Mic size={16} />,
         },
       ],
     },
