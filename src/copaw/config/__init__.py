@@ -5,6 +5,12 @@ from .config import (
     ChannelConfigUnion,
     AgentsRunningConfig,
     HeartbeatConfig,
+    AuthConfig,
+)
+from .auth import (
+    AuthSettings,
+    OAuthConfig,
+    auth_settings,
 )
 from .utils import (
     get_available_channels,
@@ -27,6 +33,10 @@ __all__ = [
     "ChannelConfig",
     "ChannelConfigUnion",
     "HeartbeatConfig",
+    "AuthConfig",
+    "AuthSettings",
+    "OAuthConfig",
+    "auth_settings",
     "ConfigWatcher",
     "get_available_channels",
     "get_config_path",

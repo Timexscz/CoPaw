@@ -1,4 +1,4 @@
-import { Card, Button } from "@agentscope-ai/design";
+import { Button, Tooltip, message } from "@agentscope-ai/design";
 import {
   DeleteOutlined,
   FileTextFilled,
@@ -9,17 +9,16 @@ import {
   FilePptFilled,
   FileImageFilled,
   CodeFilled,
+  CheckCircleFilled,
+  StopOutlined,
 } from "@ant-design/icons";
 import type { SkillSpec } from "../../../../api/types";
 import { useTranslation } from "react-i18next";
 import styles from "../index.module.less";
 
-interface SkillCardProps {
+interface SkillRowProps {
   skill: SkillSpec;
-  isHover: boolean;
   onClick: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
   onToggleEnabled: (e: React.MouseEvent) => void;
   onDelete?: (e?: React.MouseEvent) => void;
 }
@@ -74,99 +73,88 @@ const getFileIcon = (filePath: string) => {
   }
 };
 
-export function SkillCard({
+export function SkillRow({
   skill,
-  isHover,
   onClick,
-  onMouseEnter,
-  onMouseLeave,
   onToggleEnabled,
   onDelete,
-}: SkillCardProps) {
+}: SkillRowProps) {
   const { t } = useTranslation();
   const isCustomized = skill.source === "customized";
 
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!skill.enabled && onDelete) {
+      if (!isCustomized) {
+        message.warning(t("skills.cannotDeleteBuiltIn"));
+        return;
+      }
       onDelete(e);
     }
   };
 
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleEnabled(e);
+  };
+
   return (
-    <Card
-      hoverable
+    <div
+      className={`${styles.skillRow} ${
+        skill.enabled ? styles.enabledRow : ""
+      }`}
       onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      className={`${styles.skillCard} ${
-        skill.enabled ? styles.enabledCard : ""
-      } ${isHover ? styles.hover : styles.normal}`}
     >
-      <div
-        style={{
-          marginBottom: 16,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <div className={styles.cardHeader}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span className={styles.fileIcon}>{getFileIcon(skill.name)}</span>
-            <h3 className={styles.skillTitle}>{skill.name}</h3>
+      <div className={styles.rowLeft}>
+        <span className={styles.rowFileIcon}>{getFileIcon(skill.name)}</span>
+        <div className={styles.rowInfo}>
+          <Tooltip title={skill.name}>
+            <span className={styles.rowTitle}>{skill.name}</span>
+          </Tooltip>
+          <div className={styles.rowMeta}>
+            <span className={styles.rowMetaLabel}>{t("skills.source")}:</span>
+            <code className={styles.rowMetaValue}>{skill.source}</code>
+            <span className={styles.rowMetaDivider}>|</span>
+            <span className={styles.rowMetaLabel}>{t("skills.path")}:</span>
+            <code className={`${styles.rowMetaValue} ${styles.rowPath}`}>
+              {skill.path}
+            </code>
           </div>
-          <div className={styles.statusContainer}>
-            <span
-              className={`${styles.statusDot} ${
-                skill.enabled ? styles.enabled : styles.disabled
-              }`}
-            />
-            <span
-              className={`${styles.statusText} ${
-                skill.enabled ? styles.enabled : styles.disabled
-              }`}
-            >
-              {skill.enabled ? t("common.enabled") : t("common.disabled")}
-            </span>
-          </div>
-        </div>
-
-        <div className={styles.infoSection}>
-          <div className={styles.infoLabel}>{t("skills.source")}</div>
-          <code className={styles.infoCode}>{skill.source}</code>
-        </div>
-
-        <div className={styles.infoSection}>
-          <div className={styles.infoLabel}>{t("skills.path")}</div>
-          <code className={`${styles.infoCode} ${styles.path}`}>
-            {skill.path}
-          </code>
         </div>
       </div>
 
-      <div className={styles.cardFooter}>
+      <div className={styles.rowActions}>
         <Button
-          type="link"
+          type={skill.enabled ? "primary" : "default"}
           size="small"
-          onClick={onToggleEnabled}
-          className={styles.actionButton}
+          onClick={handleToggle}
+          className={`${styles.rowToggleButton} ${
+            skill.enabled ? styles.rowToggleEnabled : styles.rowToggleDisabled
+          }`}
+          icon={
+            skill.enabled ? (
+              <CheckCircleFilled />
+            ) : (
+              <StopOutlined style={{ transform: "rotate(45deg)" }} />
+            )
+          }
         >
-          {skill.enabled ? t("common.disable") : t("common.enable")}
+          {skill.enabled ? t("common.enabled") : t("common.disabled")}
         </Button>
 
-        {isCustomized && onDelete && (
+        {onDelete && (
           <Button
             type="text"
             size="small"
             danger
             icon={<DeleteOutlined />}
-            className={styles.deleteButton}
+            className={styles.rowDeleteButton}
             onClick={handleDeleteClick}
             disabled={skill.enabled}
+            title={isCustomized ? t("common.delete") : t("skills.cannotDeleteBuiltIn")}
           />
         )}
       </div>
-    </Card>
+    </div>
   );
 }

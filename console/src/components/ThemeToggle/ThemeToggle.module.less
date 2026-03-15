@@ -1,0 +1,51 @@
+.themeToggle {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--theme-hover-bg);
+  }
+
+  .icon {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .label {
+    font-size: 14px;
+    color: inherit;
+  }
+}
+
+.themeDropdown {
+  .ant-dropdown-menu {
+    padding: 4px;
+  }
+
+  .ant-dropdown-menu-item {
+    border-radius: 6px;
+    margin-bottom: 2px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: var(--theme-hover-bg);
+    }
+
+    &.ant-dropdown-menu-item-selected {
+      background-color: var(--theme-primary-light);
+
+      &:hover {
+        background-color: var(--theme-primary-light);
+      }
+    }
+  }
+}

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button, Form, Modal } from "@agentscope-ai/design";
-import { DownloadOutlined, PlusOutlined } from "@ant-design/icons";
+import { DownloadOutlined, PlusOutlined, SettingOutlined, DownOutlined } from "@ant-design/icons";
 import type { SkillSpec } from "../../../api/types";
-import { SkillCard, SkillDrawer } from "./components";
+import { SkillRow, SkillDrawer, CategoryManager } from "./components";
 import { useSkills } from "./useSkills";
 import { useTranslation } from "react-i18next";
+import { categorizeSkill, getAllCategories } from "../../../config/skillCategories";
 import styles from "./index.module.less";
 
 function SkillsPage() {
@@ -23,8 +24,29 @@ function SkillsPage() {
   const [importUrl, setImportUrl] = useState("");
   const [importUrlError, setImportUrlError] = useState("");
   const [editingSkill, setEditingSkill] = useState<SkillSpec | null>(null);
-  const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [form] = Form.useForm<SkillSpec>();
+  const [categoryManagerOpen, setCategoryManagerOpen] = useState(false);
+  
+  // Collapsed state for categories (persisted in localStorage)
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>(() => {
+    const saved = localStorage.getItem("skills_collapsed_categories");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return {};
+      }
+    }
+    return {};
+  });
+
+  const handleToggleCategory = (categoryId: string) => {
+    setCollapsedCategories(prev => {
+      const next = { ...prev, [categoryId]: !prev[categoryId] };
+      localStorage.setItem("skills_collapsed_categories", JSON.stringify(next));
+      return next;
+    });
+  };
 
   const supportedSkillUrlPrefixes = [
     "https://skills.sh/",
@@ -115,6 +137,36 @@ function SkillsPage() {
     }
   };
 
+  // Group skills by intelligent category (based on content analysis)
+  const groupedSkills = useMemo(() => {
+    const groups: Record<string, SkillSpec[]> = {};
+    
+    skills.forEach((skill) => {
+      // Use intelligent categorization based on skill content
+      const category = categorizeSkill({
+        name: skill.name,
+        description: skill.content,
+        content: skill.content,
+      });
+      
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(skill);
+    });
+
+    // Sort skills within each group: enabled first, then by name
+    Object.keys(groups).forEach((type) => {
+      groups[type].sort((a, b) => {
+        if (a.enabled && !b.enabled) return -1;
+        if (!a.enabled && b.enabled) return 1;
+        return a.name.localeCompare(b.name);
+      });
+    });
+
+    return groups;
+  }, [skills]);
+
   return (
     <div className={styles.skillsPage}>
       <div className={styles.header}>
@@ -123,6 +175,13 @@ function SkillsPage() {
           <p className={styles.description}>{t("skills.description")}</p>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
+          <Button
+            type="default"
+            onClick={() => setCategoryManagerOpen(true)}
+            icon={<SettingOutlined />}
+          >
+            分类管理
+          </Button>
           <Button
             type="primary"
             onClick={handleImportFromHub}
@@ -203,26 +262,48 @@ function SkillsPage() {
           <span className={styles.loadingText}>{t("common.loading")}</span>
         </div>
       ) : (
-        <div className={styles.skillsGrid}>
-          {skills
-            .slice()
-            .sort((a, b) => {
-              if (a.enabled && !b.enabled) return -1;
-              if (!a.enabled && b.enabled) return 1;
-              return a.name.localeCompare(b.name);
-            })
-            .map((skill) => (
-              <SkillCard
-                key={skill.name}
-                skill={skill}
-                isHover={hoverKey === skill.name}
-                onClick={() => handleEdit(skill)}
-                onMouseEnter={() => setHoverKey(skill.name)}
-                onMouseLeave={() => setHoverKey(null)}
-                onToggleEnabled={(e) => handleToggleEnabled(skill, e)}
-                onDelete={(e) => handleDelete(skill, e)}
-              />
-            ))}
+        <div className={styles.skillsList}>
+          {getAllCategories().map((category) => {
+            const categorySkills = groupedSkills[category.id] || [];
+            if (categorySkills.length === 0) return null;
+            
+            const isCollapsed = collapsedCategories[category.id] ?? false;
+            
+            return (
+              <div key={category.id} className={styles.skillGroup}>
+                <div
+                  className={styles.groupHeader}
+                  onClick={() => handleToggleCategory(category.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <h2 className={styles.groupTitle} style={{ color: category.color }}>
+                    {category.icon} {category.name}
+                    <span className={styles.groupCount}>({categorySkills.length})</span>
+                  </h2>
+                  <DownOutlined
+                    className={styles.expandIcon}
+                    style={{
+                      transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)",
+                      transition: "transform 0.2s",
+                    }}
+                  />
+                </div>
+                {!isCollapsed && (
+                  <div className={styles.skillRows}>
+                    {categorySkills.map((skill) => (
+                      <SkillRow
+                        key={skill.name}
+                        skill={skill}
+                        onClick={() => handleEdit(skill)}
+                        onToggleEnabled={(e) => handleToggleEnabled(skill, e)}
+                        onDelete={(e) => handleDelete(skill, e)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -232,6 +313,11 @@ function SkillsPage() {
         form={form}
         onClose={handleDrawerClose}
         onSubmit={handleSubmit}
+      />
+
+      <CategoryManager
+        open={categoryManagerOpen}
+        onClose={() => setCategoryManagerOpen(false)}
       />
     </div>
   );

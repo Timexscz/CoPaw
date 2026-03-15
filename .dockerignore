@@ -1,12 +1,24 @@
-# Git and IDE
+# =============================================================================
+# Git and Version Control
+# =============================================================================
 .git
 .gitignore
+
+# =============================================================================
+# IDEs and Editors
+# =============================================================================
 .idea
 .vscode
+
+# =============================================================================
+# Documentation (keep README, exclude other docs to reduce image size)
+# =============================================================================
 *.md
 !README.md
 
-# Python dev and cache
+# =============================================================================
+# Python Development and Cache
+# =============================================================================
 __pycache__
 *.py[cod]
 *$py.class
@@ -20,39 +32,63 @@ htmlcov
 .mypy_cache
 .ruff_cache
 
+# =============================================================================
 # Tests (not needed in runtime image)
-tests
+# =============================================================================
+tests/
 test.py
 *_test.py
 pytest.ini
 .pre-commit-config.yaml
 .flake8
-.eslintrc
-.stylelintrc
 
-# Frontend: exclude build artifacts; ship pre-built src/console/dist in image
-website
-console/node_modules
-console/dist
-console/.vite
-node_modules
+# =============================================================================
+# Frontend: Build Artifacts
+# Ship pre-built src/copaw/console/dist in image, exclude source build dirs
+# =============================================================================
+website/
+console/node_modules/
+console/dist/
+console/.vite/
+node_modules/
 **/node_modules
 **/dist
 !src/copaw/console/dist
 !src/copaw/console/dist/**
 **/.vite
 
-# Example and local config (mount at runtime instead)
-example
+# ESLint and style configs (not needed in runtime)
+.eslintrc
+.stylelintrc
+
+# =============================================================================
+# Example and Local Configuration (mount at runtime instead)
+# =============================================================================
+example/
 config.json
 jobs.json
-sessions_mount_dir
+sessions_mount_dir/
 
-# Misc
+# =============================================================================
+# Environment Files
+# =============================================================================
 .env
 .env.*
 !.env.example
+
+# =============================================================================
+# Logs and Temporary Files
+# =============================================================================
 .DS_Store
 *.log
-logs
-cookbook
+logs/
+cookbook/
+
+# =============================================================================
+# AI Assistant Files (not needed in production)
+# =============================================================================
+.claude
+.qoder
+.openspec
+AGENTS.md
+CLAUDE.md

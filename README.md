@@ -380,6 +380,14 @@ cp -R console/dist/. src/copaw/console/
 
 # Install Python package
 pip install -e .
+
+# Note: The following dependencies will be installed automatically:
+# - asyncpg>=0.28.0 (PostgreSQL driver)
+# - redis>=5.0.0 (Redis client)
+# - pydantic>=2.0.0 (Settings validation)
+# - python-frontmatter>=1.0.0 (Markdown with front matter)
+# - markdown>=3.4.0 (Markdown processing)
+# - python-dotenv>=1.0.0 (Environment variables)
 ```
 
 - **Dev** (tests, formatting): `pip install -e ".[dev]"`

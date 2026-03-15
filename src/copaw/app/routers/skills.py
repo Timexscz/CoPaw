@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from typing import Any
+from pathlib import Path
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from ...agents.skills_manager import (
@@ -12,6 +13,9 @@ from ...agents.skills_hub import (
     search_hub_skills,
     install_skill_from_hub,
 )
+from ...services.skill_parser import SkillParser
+from ...services.category_service import CategoryService
+from ...db.repositories import CategoryRepository, SkillCategoryMapRepository
 
 
 logger = logging.getLogger(__name__)
@@ -78,6 +82,72 @@ async def list_skills() -> list[SkillSpec]:
             ),
         )
     return skills_spec
+
+
+@router.get("/{skill_name}/detail")
+async def get_skill_detail(skill_name: str):
+    """
+    Get skill detail with parsed Markdown content.
+    
+    Returns:
+        {
+            "name": "docx",
+            "source": "builtin",
+            "path": "/path/to/skill",
+            "metadata": { ... },
+            "category": "document",
+            "category_name": "文档处理",
+            "category_icon": "📄",
+            "category_color": "#1890ff",
+            "html_content": "<h1>DOCX...</h1>...",
+            "raw_content": "---\nname: docx\n..."
+        }
+    """
+    # Get skill info
+    all_skills = SkillService.list_all_skills()
+    skill_info = next((s for s in all_skills if s.name == skill_name), None)
+    
+    if not skill_info:
+        raise HTTPException(status_code=404, detail="Skill not found")
+    
+    skill_path = Path(skill_info.path) / "SKILL.md"
+    if not skill_path.exists():
+        raise HTTPException(status_code=404, detail="SKILL.md not found")
+    
+    # Parse Markdown
+    metadata, html_content = SkillParser.parse_skill_md(skill_path)
+    raw_content = skill_path.read_text()
+    
+    # Get category
+    category_id = await SkillCategoryMapRepository.get_category(skill_name)
+    
+    if not category_id:
+        # Try from Front Matter
+        category_id = metadata.get('category')
+    
+    if not category_id:
+        # Auto-categorize
+        category_id, _, _ = await CategoryService.categorize_skill(
+            metadata['name'],
+            metadata['description'],
+            raw_content,
+        )
+    
+    # Get category details
+    category = await CategoryRepository.get_category(category_id)
+    
+    return {
+        "name": metadata['name'],
+        "source": skill_info.source,
+        "path": str(skill_info.path),
+        "metadata": metadata['metadata'],
+        "category": category_id,
+        "category_name": category.name if category else "其他",
+        "category_icon": category.icon if category else "📦",
+        "category_color": category.color if category else "#d9d9d9",
+        "html_content": html_content,
+        "raw_content": raw_content,
+    }
 
 
 @router.get("/available")

@@ -55,7 +55,7 @@ export function LocalProviderCard({
                 borderRadius: "50%",
                 backgroundColor: statusReady ? "#52c41a" : "#d9d9d9",
                 boxShadow: statusReady
-                  ? "0 0 0 2px rgba(82, 196, 26, 0.2)"
+                  ? "0 0 0 2px rgba(56, 152, 13, 0.3)"
                   : "none",
               }}
             />

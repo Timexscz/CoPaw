@@ -1,30 +1,28 @@
-import { Card, Button, Modal, Tooltip } from "@agentscope-ai/design";
-import { DeleteOutlined } from "@ant-design/icons";
+import { Button, Tooltip, Modal } from "@agentscope-ai/design";
+import {
+  DeleteOutlined,
+  CheckCircleFilled,
+  StopOutlined,
+} from "@ant-design/icons";
 import { Server } from "lucide-react";
 import type { MCPClientInfo } from "../../../../api/types";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import styles from "../index.module.less";
 
-interface MCPClientCardProps {
+interface MCPClientRowProps {
   client: MCPClientInfo;
   onToggle: (client: MCPClientInfo, e: React.MouseEvent) => void;
   onDelete: (client: MCPClientInfo, e: React.MouseEvent) => void;
   onUpdate: (key: string, updates: any) => Promise<boolean>;
-  isHovered: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 }
 
-export function MCPClientCard({
+export function MCPClientRow({
   client,
   onToggle,
   onDelete,
   onUpdate,
-  isHovered,
-  onMouseEnter,
-  onMouseLeave,
-}: MCPClientCardProps) {
+}: MCPClientRowProps) {
   const { t } = useTranslation();
   const [jsonModalOpen, setJsonModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -36,11 +34,6 @@ export function MCPClientCard({
     client.transport === "streamable_http" || client.transport === "sse";
   const clientType = isRemote ? "Remote" : "Local";
 
-  const handleToggleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onToggle(client, e);
-  };
-
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setDeleteModalOpen(true);
@@ -51,7 +44,7 @@ export function MCPClientCard({
     onDelete(client, null as any);
   };
 
-  const handleCardClick = () => {
+  const handleRowClick = () => {
     const jsonStr = JSON.stringify(client, null, 2);
     setEditedJson(jsonStr);
     setIsEditing(false);
@@ -74,63 +67,61 @@ export function MCPClientCard({
     }
   };
 
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggle(client, e);
+  };
+
   const clientJson = JSON.stringify(client, null, 2);
 
   return (
     <>
-      <Card
-        hoverable
-        onClick={handleCardClick}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        className={`${styles.mcpCard} ${
-          client.enabled ? styles.enabledCard : ""
-        } ${isHovered ? styles.hover : styles.normal}`}
+      <div
+        className={`${styles.mcpRow} ${
+          client.enabled ? styles.enabledRow : ""
+        }`}
+        onClick={handleRowClick}
       >
-        <div className={styles.cardHeader}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span className={styles.fileIcon}>
-              <Server style={{ color: "#1890ff", fontSize: 20 }} />
-            </span>
-            <Tooltip title={client.name}>
-              <h3 className={styles.mcpTitle}>{client.name}</h3>
-            </Tooltip>
-            <span
-              className={`${styles.typeBadge} ${
-                isRemote ? styles.remote : styles.local
-              }`}
-            >
-              {clientType}
-            </span>
-          </div>
-          <div className={styles.statusContainer}>
-            <span
-              className={`${styles.statusDot} ${
-                client.enabled ? styles.enabled : styles.disabled
-              }`}
-            />
-            <span
-              className={`${styles.statusText} ${
-                client.enabled ? styles.enabled : styles.disabled
-              }`}
-            >
-              {client.enabled ? t("common.enabled") : t("common.disabled")}
-            </span>
+        <div className={styles.rowLeft}>
+          <span className={styles.rowFileIcon}>
+            <Server className={styles.mcpClientIcon} />
+          </span>
+          <div className={styles.rowInfo}>
+            <div className={styles.rowTitleWrapper}>
+              <Tooltip title={client.name}>
+                <span className={styles.rowTitle}>{client.name}</span>
+              </Tooltip>
+              <span
+                className={`${styles.rowTypeBadge} ${
+                  isRemote ? styles.remote : styles.local
+                }`}
+              >
+                {clientType}
+              </span>
+            </div>
+            <div className={styles.rowDescription}>
+              {client.description || "\u00A0"}
+            </div>
           </div>
         </div>
 
-        <div className={styles.description}>
-          {client.description || "\u00A0"}
-        </div>
-
-        <div className={styles.cardFooter}>
+        <div className={styles.rowActions}>
           <Button
-            type="link"
+            type={client.enabled ? "primary" : "default"}
             size="small"
-            onClick={handleToggleClick}
-            className={styles.actionButton}
+            onClick={handleToggle}
+            className={`${styles.rowToggleButton} ${
+              client.enabled ? styles.rowToggleEnabled : styles.rowToggleDisabled
+            }`}
+            icon={
+              client.enabled ? (
+                <CheckCircleFilled />
+              ) : (
+                <StopOutlined style={{ transform: "rotate(45deg)" }} />
+              )
+            }
           >
-            {client.enabled ? t("common.disable") : t("common.enable")}
+            {client.enabled ? t("common.enabled") : t("common.disabled")}
           </Button>
 
           <Button
@@ -138,12 +129,12 @@ export function MCPClientCard({
             size="small"
             danger
             icon={<DeleteOutlined />}
-            className={styles.deleteButton}
+            className={styles.rowDeleteButton}
             onClick={handleDeleteClick}
             disabled={client.enabled}
           />
         </div>
-      </Card>
+      </div>
 
       <Modal
         title={t("common.confirm")}

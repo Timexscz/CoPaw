@@ -9,7 +9,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from agentscope_runtime.engine.app import AgentApp
 
 from .runner import AgentRunner
@@ -18,6 +18,7 @@ from ..config import (  # pylint: disable=no-name-in-module
     update_last_dispatch,
     ConfigWatcher,
 )
+from ..config.auth import auth_settings
 from ..config.utils import get_jobs_path, get_chats_path, get_config_path
 from ..constant import DOCS_ENABLED, LOG_LEVEL_ENV, CORS_ORIGINS, WORKING_DIR
 from ..__version__ import __version__
@@ -445,6 +446,73 @@ if CORS_ORIGINS:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+
+@app.middleware("http")
+async def auth_middleware(request, call_next):
+    """Authentication middleware to protect API routes."""
+    # Skip auth for these paths
+    skip_paths = [
+        "/api/auth/login",
+        "/api/auth/register",
+        "/api/auth/status",
+        "/api/version",
+        "/",
+        "/docs",
+        "/redoc",
+        "/openapi.json",
+        "/logo.png",
+        "/copaw-symbol.svg",
+    ]
+
+    # Check if path should skip authentication
+    if any(request.url.path.startswith(skip) for skip in skip_paths):
+        return await call_next(request)
+
+    # Check if auth is enabled
+    try:
+        config = load_config()
+        if not config.auth.enabled:
+            return await call_next(request)
+    except Exception:
+        # If config loading fails, allow request
+        return await call_next(request)
+
+    # Skip auth for static files and assets
+    if request.url.path.startswith("/assets"):
+        return await call_next(request)
+
+    # Check authentication for protected API routes
+    if request.url.path.startswith("/api/"):
+        auth_header = request.headers.get("Authorization")
+
+        if not auth_header or not auth_header.startswith("Bearer "):
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Not authenticated"},
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+        token = auth_header.split(" ", 1)[1]
+
+        # Verify token
+        from ..services.auth import user_service
+        payload = user_service.verify_token(token)
+
+        if not payload:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Invalid or expired token"},
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+        # Add user info to request state
+        request.state.user = {
+            "id": int(payload["sub"]),
+            "username": payload["username"],
+        }
+
+    return await call_next(request)
 
 
 # Console static dir: env, or copaw package data (console), or cwd.

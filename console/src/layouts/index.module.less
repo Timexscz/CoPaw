@@ -14,19 +14,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  background: var(--theme-bg-container);
+  border-bottom: 1px solid var(--theme-border-secondary);
 }
 
 .headerTitle {
   font-size: 18px;
   font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+.username {
+  font-size: 14px;
+  color: var(--theme-text-primary);
+  transition: color 0.3s ease;
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 .sider {
-  background: #fff !important;
-  border-right: 1px solid #f0f0f0;
+  background: var(--theme-bg-container) !important;
+  border-right: 1px solid var(--theme-border-secondary);
   overflow: auto;
   height: 100vh;
 
@@ -57,11 +64,12 @@
 
 .versionBadge {
   font-size: 10px;
-  color: #615ced;
+  color: var(--theme-primary);
   font-weight: 600;
   line-height: 1;
   position: relative;
   top: 10px;
+  transition: color 0.3s ease;
 }
 
 .versionBadgeClickable {
@@ -74,12 +82,12 @@
 
 .collapseBtn {
   margin: auto;
-  color: #615ced;
+  color: var(--theme-primary);
 }
 
 // ─── Update Modal ─────────────────────────────────────────────────────────────
 .updateModalTitle {
-  color: #615ced;
+  color: var(--theme-primary);
 }
 
 .updateModalBody {
@@ -104,8 +112,8 @@
 // ─── Code block inside update modal ──────────────────────────────────────────
 .codeBlock {
   position: relative;
-  background: #f5f5f5;
-  border: 1px solid #e8e8e8;
+  background: var(--theme-bg-tertiary);
+  border: 1px solid var(--theme-border-secondary);
   border-radius: 6px;
   padding: 12px 40px 12px 16px;
   overflow-x: auto;
@@ -115,14 +123,16 @@
 .codeBlockInner {
   font-family: monospace;
   font-size: 13px;
+  color: var(--theme-text-primary);
 }
 
 .codeInline {
-  background: #f5f5f5;
+  background: var(--theme-bg-tertiary);
   border-radius: 3px;
   padding: 1px 5px;
   font-family: monospace;
   font-size: 13px;
+  color: var(--theme-text-primary);
 }
 
 // ─── CopyButton ───────────────────────────────────────────────────────────────
@@ -131,12 +141,25 @@
   top: 8px;
   right: 8px;
   transition: color 0.2s;
+  color: var(--theme-text-tertiary);
 }
 
 .copyBtnCopied {
-  color: #52c41a;
+  color: var(--theme-success);
 }
 
 .copyBtnDefault {
-  color: #999;
+  color: var(--theme-text-tertiary);
+}
+
+// ─── Dark Mode Transitions ────────────────────────────────────────────────────
+.sider,
+.header,
+.logoWrapper,
+.versionBadge,
+.updateModalTitle,
+.codeBlock,
+.codeBlockInner,
+.codeInline {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

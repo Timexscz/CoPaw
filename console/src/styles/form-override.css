@@ -5,11 +5,11 @@
 
 /* Protect red asterisk for Ant Design form required marks */
 .ant-form-item-required::before {
-  color: #ff4d4f !important;
+  color: var(--theme-error, #ff4d4f) !important;
 }
 
 /* Protect custom required mark span elements (e.g., spark-required-mark) */
 span.spark-required-mark,
 span[class*="spark-required-mark"] {
-  color: #ff4d4f !important;
+  color: var(--theme-error, #ff4d4f) !important;
 }

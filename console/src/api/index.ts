@@ -17,8 +17,12 @@ import { workspaceApi } from "./modules/workspace";
 import { localModelApi } from "./modules/localModel";
 import { ollamaModelApi } from "./modules/ollamaModel";
 import { mcpApi } from "./modules/mcp";
+import { authApi } from "./modules/auth";
 
 export const api = {
+  // Auth
+  ...authApi,
+
   // Root
   ...rootApi,
 

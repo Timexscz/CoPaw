@@ -1,68 +1,54 @@
 <div align="center">
 
-# CoPaw
+# CoPaw-CE (Community Edition)
 
-[![GitHub 仓库](https://img.shields.io/badge/GitHub-仓库-black.svg?logo=github)](https://github.com/agentscope-ai/CoPaw)
-[![PyPI](https://img.shields.io/pypi/v/copaw?color=3775A9&label=PyPI&logo=pypi)](https://pypi.org/project/copaw/)
-[![文档](https://img.shields.io/badge/文档-在线-green.svg?logo=readthedocs&label=Docs)](https://copaw.agentscope.io/)
+[![GitHub 仓库](https://img.shields.io/badge/GitHub-仓库-black.svg?logo=github)](https://github.com/Timexscz/CoPaw)
+[![版本](https://img.shields.io/badge/version-v0.0.6.ce.1-blue.svg)](https://github.com/Timexscz/CoPaw/releases)
+[![基于](https://img.shields.io/badge/基于-v0.0.5.post1-green.svg)](https://github.com/agentscope-ai/CoPaw)
 [![Python 版本](https://img.shields.io/badge/python-3.10%20~%20%3C3.14-blue.svg?logo=python&label=Python)](https://www.python.org/downloads/)
-[![最后提交](https://img.shields.io/github/last-commit/agentscope-ai/CoPaw)](https://github.com/agentscope-ai/CoPaw)
 [![许可证](https://img.shields.io/badge/license-Apache%202.0-red.svg?logo=apache&label=%E8%AE%B8%E5%8F%AF%E8%AF%81)](LICENSE)
-[![代码风格](https://img.shields.io/badge/code%20style-black-black.svg?logo=python&label=%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC)](https://github.com/psf/black)
-[![GitHub Star](https://img.shields.io/github/stars/agentscope-ai/CoPaw?style=flat&logo=github&color=yellow&label=Star)](https://github.com/agentscope-ai/CoPaw/stargazers)
-[![GitHub Fork](https://img.shields.io/github/forks/agentscope-ai/CoPaw?style=flat&logo=github&color=purple&label=Fork)](https://github.com/agentscope-ai/CoPaw/network)
-[![DeepWiki](https://img.shields.io/badge/DeepWiki-Ask_Devin-navy.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAyCAYAAAAnWDnqAAAAAXNSR0IArs4c6QAAA05JREFUaEPtmUtyEzEQhtWTQyQLHNak2AB7ZnyXZMEjXMGeK/AIi+QuHrMnbChYY7MIh8g01fJoopFb0uhhEqqcbWTp06/uv1saEDv4O3n3dV60RfP947Mm9/SQc0ICFQgzfc4CYZoTPAswgSJCCUJUnAAoRHOAUOcATwbmVLWdGoH//PB8mnKqScAhsD0kYP3j/Yt5LPQe2KvcXmGvRHcDnpxfL2zOYJ1mFwrryWTz0advv1Ut4CJgf5uhDuDj5eUcAUoahrdY/56ebRWeraTjMt/00Sh3UDtjgHtQNHwcRGOC98BJEAEymycmYcWwOprTgcB6VZ5JK5TAJ+fXGLBm3FDAmn6oPPjR4rKCAoJCal2eAiQp2x0vxTPB3ALO2CRkwmDy5WohzBDwSEFKRwPbknEggCPB/imwrycgxX2NzoMCHhPkDwqYMr9tRcP5qNrMZHkVnOjRMWwLCcr8ohBVb1OMjxLwGCvjTikrsBOiA6fNyCrm8V1rP93iVPpwaE+gO0SsWmPiXB+jikdf6SizrT5qKasx5j8ABbHpFTx+vFXp9EnYQmLx02h1QTTrl6eDqxLnGjporxl3NL3agEvXdT0WmEost648sQOYAeJS9Q7bfUVoMGnjo4AZdUMQku50McDcMWcBPvr0SzbTAFDfvJqwLzgxwATnCgnp4wDl6Aa+Ax283gghmj+vj7feE2KBBRMW3FzOpLOADl0Isb5587h/U4gGvkt5v60Z1VLG8BhYjbzRwyQZemwAd6cCR5/XFWLYZRIMpX39AR0tjaGGiGzLVyhse5C9RKC6ai42ppWPKiBagOvaYk8lO7DajerabOZP46Lby5wKjw1HCRx7p9sVMOWGzb/vA1hwiWc6jm3MvQDTogQkiqIhJV0nBQBTU+3okKCFDy9WwferkHjtxib7t3xIUQtHxnIwtx4mpg26/HfwVNVDb4oI9RHmx5WGelRVlrtiw43zboCLaxv46AZeB3IlTkwouebTr1y2NjSpHz68WNFjHvupy3q8TFn3Hos2IAk4Ju5dCo8B3wP7VPr/FGaKiG+T+v+TQqIrOqMTL1VdWV1DdmcbO8KXBz6esmYWYKPwDL5b5FA1a0hwapHiom0r/cKaoqr+27/XcrS5UwSMbQAAAABJRU5ErkJggg==)](https://deepwiki.com/agentscope-ai/CoPaw)
-[![Discord](https://img.shields.io/badge/Discord-Join_Us-blueviolet.svg?logo=discord)](https://discord.gg/eYMpfnkG8h)
-[![X](https://img.shields.io/badge/X-Follow_Us-black.svg?logo=x)](https://x.com/agentscope_ai)
-[![钉钉群](https://img.shields.io/badge/DingTalk-Join_Us-orange.svg)](https://qr.dingtalk.com/action/joingroup?code=v1,k1,OmDlBXpjW+I2vWjKDsjvI9dhcXjGZi3bQiojOq3dlDw=&_dt_no_comment=1&origin=11)
+[![测试](https://img.shields.io/badge/tests-56%20passed-green.svg)](https://github.com/Timexscz/CoPaw/actions)
 
-[[文档](https://copaw.agentscope.io/)] [[English](README.md)] [[日本語](README_ja.md)]
+[[English](README.md)] [[日本語](README_ja.md)] | [官方文档](https://copaw.agentscope.io/) | [官方仓库](https://github.com/agentscope-ai/CoPaw)
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i2/O1CN014TIqyO1U5wDiSbFfA_!!6000000002467-2-tps-816-192.png" alt="CoPaw Logo" width="120">
 </p>
 
-<p align="center"><b>懂你所需，伴你左右。</b></p>
+<p align="center"><b>懂你所需，伴你左右 — 社区增强版</b></p>
+
+<p align="center">
+  <strong>🔐 认证系统</strong> • 
+  <strong>📂 MCP 分类管理</strong> • 
+  <strong>🛠️ Skills 分类管理</strong> • 
+  <strong>🎨 主题切换</strong> • 
+  <strong>📚 文档优化</strong>
+</p>
 
 </div>
 
-你的AI个人助理；安装极简、本地与云上均可部署；支持多端接入、能力轻松扩展。
+## 🎉 发布说明
 
-> **核心能力：**
->
-> **全域触达** — 钉钉、飞书、QQ、Discord、iMessage 等频道，一个 CoPaw 按需连接。
->
-> **由你掌控** — 记忆与个性化由你掌控，本地或云端均可；定时与协作发往指定频道。
->
-> **Skills 扩展** — 内置定时任务，自定义技能目录，CoPaw 自动加载，无绑定。
->
-> <details>
-> <summary><b>你可以用 CoPaw 做什么</b></summary>
->
-> <br>
->
-> - **社交媒体**：每日热帖摘要（小红书、知乎、Reddit），B 站/YouTube 新视频摘要。
-> - **生产力**：邮件与 Newsletter 精华推送到钉钉/飞书/QQ，邮件与日历整理联系人。
-> - **创意与构建**：睡前说明目标、自动执行，次日获得雏形；从选题到成片全流程。
-> - **研究与学习**：追踪科技与 AI 资讯，个人知识库检索复用。
-> - **桌面与文件**：整理与搜索本地文件、阅读与摘要文档，在会话中索要文件。
-> - **探索更多**：用 Skills 与定时任务组合成你自己的 agentic app。
->
-> </details>
+**[2026-03-14] v0.0.6.ce.1 发布**
 
----
+这是 CoPaw 的社区增强版本，包含以下改进：
 
-## 新闻
+### 新增功能
+- 🔐 **完整的认证系统** - JWT 认证，保护 API 访问（可选启用）
+- 📂 **MCP 客户端分类管理** - 智能分类：数据库、文件系统、API 集成、AI 服务等
+- 🛠️ **Skills 技能分类管理** - 分类：文档处理、自动化、浏览器、通讯工具等
+- 🎨 **主题切换** - 支持深色/浅色模式
+- 📚 **文档结构优化** - 统一索引 INDEX.md，精简 40%
 
-[2026-03-06] 我们发布了 v0.0.5！完整更新说明见 [v0.0.5 发布说明](https://agentscope-ai.github.io/CoPaw/release-notes)。
+### 测试与质量
+- ✅ **56 个测试全部通过** (100% 覆盖率)
+- ✅ **修复所有弃用警告** (Pydantic V2、datetime、Redis)
+- ✅ **异步集成测试完善** - 使用真实数据库验证
 
-- **[v0.0.5]** **新增：** Daemon 模式；Twilio 语音频道；DeepSeek Reasoner 支持；智能体中断 API；版本更新提醒；思考/工具调用选择性显示。
-- **[v0.0.5]** **优化：** 记忆系统升级；控制台界面改进；可选频道懒加载；Windows 一键安装脚本。
-- **[v0.0.5]** **修复：** Docker 配置持久化；Ollama base URL；频道修复；Windows 兼容性；MCP 客户端稳定性。
-- **[v0.0.5]** **文档：** 增添更新日志；优化模型、频道配置指南；Docker + Ollama 连接指南。
-- **[v0.0.5]** **贡献者：** 感谢新贡献者：[@qoli](https://github.com/qoli)、[@qbc2016](https://github.com/qbc2016)、[@yunlzheng](https://github.com/yunlzheng)、[@BlueSkyXN](https://github.com/BlueSkyXN)、[@sidonsoft](https://github.com/sidonsoft)、[@lishengzxc](https://github.com/lishengzxc)、[@pikaxinge](https://github.com/pikaxinge)、[@linshengli](https://github.com/linshengli)、[@eltociear](https://github.com/eltociear)、[@liuxiaopai-ai](https://github.com/liuxiaopai-ai)、[@Leirunlin](https://github.com/Leirunlin)、[@pan-x-c](https://github.com/pan-x-c)、[@garyzhang99](https://github.com/garyzhang99)、[@celestialhorse51D](https://github.com/celestialhorse51D)、[@wwx814](https://github.com/wwx814)、[@nszhsl](https://github.com/nszhsl)、[@DavdGao](https://github.com/DavdGao)、[@zhangckcup](https://github.com/zhangckcup)。
-
-[2026-03-02] 我们发布了 v0.0.4！完整更新说明见 [v0.0.4 发布说明](https://agentscope-ai.github.io/CoPaw/release-notes)。
+### 优化
+- 📁 根目录文档精简 40%
+- 📖 创建统一文档索引
+- 🔧 代码质量提升，符合最新标准
 
 ---
 
@@ -72,355 +58,930 @@
 >
 > - **我想三条命令跑起来**： [快速开始](#快速开始) → 浏览器打开控制台。
 > - **我想在钉钉 / 飞书 / QQ 里聊**：在控制台中进行 [频道配置](https://copaw.agentscope.io/docs/channels)。
-> - **我不想装 Python**：[一键安装](#一键安装beta持续完善中) 自动管理 Python，或使用 [魔搭一键配置](https://modelscope.cn/studios/fork?target=AgentScope/CoPaw) 云端部署。
+> - **我不想装 Python**：[一键安装](#一键安装 beta 持续完善中) 自动管理 Python，或使用 [魔搭一键配置](https://modelscope.cn/studios/fork?target=AgentScope/CoPaw) 云端部署。
 
-- [新闻](#新闻)
+---
+
+## 目录
+
 - [快速开始](#快速开始)
-- [API Key](#api-key)
+- [数据库配置](#数据库配置)
+- [核心功能](#核心功能)
+- [CLI 工具](#cli-工具)
+- [版本控制](#版本控制)
+- [主题切换](#主题切换)
+- [认证系统](#认证系统)
+- [API Key 配置](#api-key-配置)
 - [本地模型](#本地模型)
-- [文档](#文档)
+- [文档导航](#文档导航)
 - [常见问题](#常见问题)
-- [路线图](#路线图)
+  - [认证系统](#1-如何启用认证系统)
+  - [MCP/Skills](#2-mcpskills-分类如何使用)
+  - [主题切换](#3-如何切换主题)
+  - [版本控制](#4-如何检查技能更新)
+  - [MCP 故障排除](#5-mcp-客户端无法启动)
+  - [配置备份](#6-如何备份和恢复配置)
+  - [测试运行](#7-测试如何运行)
+  - [Docker 部署](#8-docker-部署)
+  - [数据库安装](#9-如何安装-postgresql-和-redis)
+  - [数据库连接](#10-数据库连接失败怎么办)
+  - [数据库备份](#11-如何备份数据库)
 - [参与贡献](#参与贡献)
-- [从源码安装](#从源码安装)
-- [为什么叫 CoPaw？](#为什么叫-copaw)
-- [由谁构建](#由谁构建)
-- [许可证](#许可证)
 
 ---
 
 ## 快速开始
 
-### pip 安装 (推荐)
+### 从源码部署
 
-如果你习惯自行管理 Python 环境：
+**前提条件**: Python 3.10-3.13, Git, PostgreSQL, Redis
 
 ```bash
-pip install copaw
+1. 克隆仓库
+git clone https://github.com/Timexscz/CoPaw.git
+cd CoPaw
+
+2. 前端控制台（Web 界面必需）
+cd console && npm install && npm run build
+cd ..
+
+3. 安装依赖
+pip install -e ".[dev]"
+
+4. 将控制台构建产物复制到包目录
+mkdir -p src/copaw/console
+cp -R console/dist/. src/copaw/console/
+
+5. 初始化配置
 copaw init --defaults
+
+6. 启动服务
 copaw app
 ```
 
-在浏览器打开 **http://127.0.0.1:8088/** 即可使用控制台（与 CoPaw 对话、配置 Agent）。若要在钉钉、飞书、QQ 等 app 内对话，请参考 [文档](https://copaw.agentscope.io/docs/channels) 接入频道。
+启动后，在浏览器打开 **http://127.0.0.1:8088/** 即可使用控制台。
 
-![Console](https://img.alicdn.com/imgextra/i4/O1CN01kUEGsC1XolpzIWdsu_!!6000000002971-2-tps-3822-2064.png)
-
-### 一键安装（beta，持续完善中）
-
-无需预装 Python — 安装脚本自动处理一切：
-
-**macOS / Linux：**
-
-```bash
-curl -fsSL https://copaw.agentscope.io/install.sh | bash
-```
-
-如需安装 Ollama 支持：
-
-```bash
-curl -fsSL https://copaw.agentscope.io/install.sh | bash -s -- --extras ollama
-```
-
-如需安装多个扩展（例如 Ollama + llama.cpp）：
-
-```bash
-curl -fsSL https://copaw.agentscope.io/install.sh | bash -s -- --extras ollama,llamacpp
-```
-
-**Windows (CMD):**
-
-```CMD
-curl -fsSL https://copaw.agentscope.io/install.bat -o install.bat && install.bat
-```
-
-**Windows（PowerShell）：**
-
-```powershell
-irm https://copaw.agentscope.io/install.ps1 | iex
-```
-
-> **注意**：安装程序将自动检查 uv 状态，若未安装则尝试自动下载配置。如遇自动安装失败，请遵循屏幕提示操作，或执行 `python -m pip install -U uv`，然后重新运行安装程序。
-
-> **⚠️ Windows 企业版 LTSC 用户特别提示**
->
-> 如果您使用的是 Windows LTSC 或受严格安全策略管控的企业环境，PowerShell 可能运行在 **受限语言模式** 下，可能会遇到以下问题：
-> 1. **如果你使用的是 CMD（.bat）：脚本执行成功但无法写入`Path`**
->
->    脚本已完成文件安装，由于 **受限语言模式** ，脚本无法自动写入环境变量，此时只需手动配置：
->    - **找到安装目录**：
->      - 检查 `uv` 是否可用：在 CMD 中输入 `uv --version` ，如果显示版本号，则**只需配置 CoPaw 路径**；如果提示 `'uv' 不是内部或外部命令，也不是可运行的程序或批处理文件。`，则需同时配置两者。
->      - uv路径（任选其一，取决于安装位置，若`uv`不可用则填）：通常在`%USERPROFILE%\.local\bin`、`%USERPROFILE%\AppData\Local\uv`或 Python 安装目录下的 `Scripts` 文件夹
->      - CoPaw路径：通常在 `%USERPROFILE%\.copaw\bin` 。
->    - **手动添加到系统的 Path 环境变量**：
->      - 按 `Win + R`，输入 `sysdm.cpl` 并回车，打开“系统属性”。
->      - 点击 “高级” -> “环境变量”。
->      - 在 “系统变量” 中找到并选中 `Path`，点击 “编辑”。
->      - 点击 “新建”，依次填入上述两个目录路径，点击确定保存。
-> 2. **如果你使用的是 PowerShell（.ps1）：脚本运行中断**
->
->   由于 **受限语言模式** ，脚本可能无法自动下载`uv`。
->   - **手动安装uv**：参考 [GitHub Release](https://github.com/astral-sh/uv/releases)下载并将`uv.exe`放至`%USERPROFILE%\.local\bin`或`%USERPROFILE%\AppData\Local\uv`；或者确保已安装 Python ，然后运行`python -m pip install -U uv`
->   - **配置`uv`环境变量**：将`uv`所在目录和 `%USERPROFILE%\.copaw\bin` 添加到系统的 `Path` 变量中。
->   - **重新运行**：打开新终端，再次执行安装脚本以完成 `CoPaw` 安装。
->   - **配置`CoPaw`环境变量**：将 `%USERPROFILE%\.copaw\bin` 添加到系统的 `Path` 变量中。
-
-安装完成后，请打开新终端并运行：
-
-```bash
-copaw init --defaults   # 或：copaw init（交互式）
-copaw app
-```
-
-<details>
-<summary><b>安装选项</b></summary>
-
-**macOS / Linux：**
-
-```bash
-# 安装指定版本
-curl -fsSL ... | bash -s -- --version 0.0.2
-
-# 从源码安装（开发/测试用）
-curl -fsSL ... | bash -s -- --from-source
-
-# 安装本地模型支持
-bash install.sh --extras llamacpp    # llama.cpp（跨平台）
-bash install.sh --extras mlx         # MLX（Apple Silicon）
-bash install.sh --extras llamacpp,mlx
-
-# 升级 — 重新运行安装命令即可
-curl -fsSL ... | bash
-
-# 卸载
-copaw uninstall          # 保留配置和数据
-copaw uninstall --purge  # 删除所有内容
-```
-
-**Windows（PowerShell）：**
-
-```powershell
-# 安装指定版本
-irm ... | iex; .\install.ps1 -Version 0.0.2
-
-# 从源码安装（开发/测试用）
-.\install.ps1 -FromSource
-
-# 安装本地模型支持
-.\install.ps1 -Extras llamacpp      # llama.cpp（跨平台）
-.\install.ps1 -Extras mlx           # MLX
-.\install.ps1 -Extras llamacpp,mlx
-
-# 升级 — 重新运行安装命令即可
-irm ... | iex
-
-# 卸载
-copaw uninstall          # 保留配置和数据
-copaw uninstall --purge  # 删除所有内容
-```
-
-</details>
-
-### 使用 Docker
-
-镜像在 **Docker Hub**（`agentscope/copaw`）。镜像 tag：`latest`（稳定版）；`pre`（PyPI 预发布版）。
-
-```bash
-docker pull agentscope/copaw:latest
-docker run -p 127.0.0.1:8088:8088 -v copaw-data:/app/working agentscope/copaw:latest
-```
-
-国内用户也可选用阿里云容器镜像服务 (ACR)：`agentscope-registry.ap-southeast-1.cr.aliyuncs.com/agentscope/copaw`（tag 相同）。
-
-然后在浏览器打开 **http://127.0.0.1:8088/** 进入控制台。配置、记忆与 Skills 保存在 `copaw-data` 卷中。如需传入 API Key（如 `DASHSCOPE_API_KEY`），在 `docker run` 时添加 `-e VAR=value` 或 `--env-file .env`。
-
-> **从容器内连接宿主机上的 Ollama 或其他模型服务**
->
-> Docker 容器内的 `localhost` 指向容器自身，而非宿主机。如果 Ollama（或其他模型服务）运行在宿主机上，可通过以下方式让容器内的 CoPaw 访问：
->
-> **方式 A** — 显式绑定宿主机地址（全平台通用）：
-> ```bash
-> docker run -p 127.0.0.1:8088:8088 \
->   --add-host=host.docker.internal:host-gateway \
->   -v copaw-data:/app/working agentscope/copaw:latest
-> ```
-> 然后在 CoPaw **设置 → 模型 → Ollama** 中，将 Base URL 改为 `http://host.docker.internal:11434/v1` 或对应端口。
->
-> **方式 B** — 使用宿主机网络（仅限 Linux）：
-> ```bash
-> docker run --network=host -v copaw-data:/app/working agentscope/copaw:latest
-> ```
-> 无需端口映射（`-p`），容器直接共享宿主机网络。注意这会将容器的所有端口暴露在宿主机上，可能与已占用的端口产生冲突。
-
-镜像从零构建。若需自行构建镜像，请参阅 [scripts/README.md](scripts/README.md#build-docker-image) 中的「Build Docker image」小节，构建后推送到你的镜像仓库。
-
-### 使用魔搭创空间
-
-**不想本地安装？** 使用 [魔搭创空间](https://modelscope.cn/studios/fork?target=AgentScope/CoPaw) 一键云端配置。请将创空间设为 **非公开**，否则他人可能操纵你的 CoPaw。
-
-### 部署到阿里云 ECS
-
-若希望将 CoPaw 部署在阿里云上，可使用阿里云 ECS 一键部署：打开 [CoPaw 阿里云 ECS 部署链接](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&ServiceId=service-1ed84201799f40879884) 按页面提示操作即可。详细步骤见 [阿里云开发者社区：CoPaw 3 分钟部署你的 AI 助理](https://developer.aliyun.com/article/1713682)。
+> **注意**: 这是社区增强版 (v0.0.6.ce.1)，基于官方 CoPaw v0.0.5.post1 构建。
 
 ---
 
-## API Key
+## 数据库配置
 
-若使用**云端大模型**（如 DashScope、ModelScope），在开始对话前必须配置 API Key。未配置有效 Key 前，CoPaw 无法正常工作。详情请参考[官方文档](https://copaw.agentscope.io/docs/models#%E9%85%8D%E7%BD%AE%E4%BA%91%E6%8F%90%E4%BE%9B%E5%95%86)。
+CoPaw 使用 **PostgreSQL** 作为主数据库，**Redis** 作为缓存和会话存储。
 
-**配置方式：**
+### 🗄️ PostgreSQL 配置
 
-1. **控制台（推荐）** — 运行 `copaw app` 后，打开 **http://127.0.0.1:8088/** → **设置** → **模型**。选择提供商、填写 **API Key**，并启用该提供商与模型。
-2. **`copaw init`** — 运行 `copaw init` 时，会引导你配置 LLM 提供商与 API Key。按提示选择提供商并填写 Key 即可。
-3. **环境变量** — 使用 DashScope 时，可在终端或工作目录下的 `.env` 文件中设置 `DASHSCOPE_API_KEY`。
+**环境变量**（在 `.env` 文件中配置）：
+```bash
+# 数据库配置
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=copaw
+DATABASE_PASSWORD=copaw_password
+DATABASE_NAME=copaw
+```
 
-其他工具所需密钥（如网页搜索的 `TAVILY_API_KEY`）可在控制台 **设置 → 环境变量** 中配置，详见 [配置](https://copaw.agentscope.io/docs/config)。
+**Docker 快速启动 PostgreSQL**：
+```bash
+docker run -d \
+  --name copaw-postgres \
+  -e POSTGRES_USER=copaw \
+  -e POSTGRES_PASSWORD=copaw_password \
+  -e POSTGRES_DB=copaw \
+  -p 5432:5432 \
+  postgres:15
+```
 
-> **仅用本地模型？** 若使用 [本地模型](#本地模型)（llama.cpp 或 MLX），则**无需**任何 API Key。
+**手动安装 PostgreSQL**：
+```bash
+# Ubuntu/Debian
+sudo apt-get install postgresql postgresql-contrib
+
+# macOS
+brew install postgresql@15
+
+# 初始化数据库
+createdb copaw
+```
+
+---
+
+### 🔴 Redis 配置
+
+**环境变量**（在 `.env` 文件中配置）：
+```bash
+# Redis 配置
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+```
+
+**Docker 快速启动 Redis**：
+```bash
+docker run -d \
+  --name copaw-redis \
+  -p 6379:6379 \
+  redis:7
+```
+
+**手动安装 Redis**：
+```bash
+# Ubuntu/Debian
+sudo apt-get install redis-server
+
+# macOS
+brew install redis
+
+# 启动 Redis
+redis-server
+```
+
+---
+
+### 🔧 数据库初始化
+
+**方式 1: 自动初始化**
+```bash
+# 使用 init 命令自动创建数据库表
+copaw init --defaults
+```
+
+**方式 2: 手动执行迁移**
+```bash
+# 连接到数据库
+psql -h localhost -U copaw -d copaw
+
+# 运行迁移
+psql -h localhost -U copaw -d copaw \
+  -f src/copaw/db/migrations/001_categories.sql
+```
+
+---
+
+### 🔍 验证连接
+
+**测试 PostgreSQL**：
+```bash
+psql -h localhost -U copaw -d copaw -c "SELECT 1"
+```
+
+**测试 Redis**：
+```bash
+redis-cli ping
+# 期望输出：PONG
+```
+
+**Python 验证**：
+```bash
+python -c "from copaw.db.database import db; import asyncio; asyncio.run(db.connect())"
+```
+
+---
+
+### 📊 配置参数说明
+
+| 变量 | 说明 | 默认值 | 必填 |
+|------|------|--------|------|
+| `DATABASE_HOST` | PostgreSQL 主机地址 | `localhost` | ✅ |
+| `DATABASE_PORT` | PostgreSQL 端口 | `5432` | ✅ |
+| `DATABASE_USER` | 数据库用户名 | `copaw` | ✅ |
+| `DATABASE_PASSWORD` | 数据库密码 | `copaw_password` | ✅ |
+| `DATABASE_NAME` | 数据库名称 | `copaw` | ✅ |
+| `REDIS_HOST` | Redis 主机地址 | `localhost` | ✅ |
+| `REDIS_PORT` | Redis 端口 | `6379` | ✅ |
+| `REDIS_PASSWORD` | Redis 密码 | (空) | ❌ |
+
+---
+
+### 🐛 常见问题
+
+**问题 1: 无法连接 PostgreSQL**
+```bash
+# 检查服务状态
+docker ps | grep postgres
+# 或
+pg_isready -h localhost -p 5432
+```
+
+**问题 2: 认证失败**
+```bash
+# 重置密码
+docker exec -it copaw-postgres psql -U postgres \
+  -c "ALTER USER copaw WITH PASSWORD 'new_password';"
+```
+
+**问题 3: 数据库不存在**
+```bash
+docker exec -it copaw-postgres psql -U copaw \
+  -c "CREATE DATABASE copaw;"
+```
+
+**问题 4: Redis 连接失败**
+```bash
+# 检查 Redis 是否运行
+docker ps | grep redis
+# 或
+redis-cli ping
+```
+
+📖 [完整数据库配置指南](docs/dev/DATABASE_CONFIG.md)
+
+---
+
+## 核心功能
+
+### 🔐 认证系统
+
+CoPaw 支持 JWT 认证，保护 API 访问和 Web Console。
+
+**启用认证**：
+```bash
+# 在 .env 文件中添加
+AUTH_ENABLED=true
+AUTH_ALLOW_REGISTRATION=true
+```
+
+**功能特性**：
+- ✅ 用户注册/登录
+- ✅ JWT Token 认证
+- ✅ 可选启用/禁用
+- ✅ 密码加密存储
+
+📖 [详细配置指南](docs/auth/AUTH_GUIDE.md)
+
+---
+
+### 📂 MCP 客户端管理
+
+MCP (Model Context Protocol) 提供模型上下文协议支持，扩展 AI 能力。
+
+**支持的 MCP 类型**：
+- 🔍 **搜索服务** - Tavily Search 等
+- 📁 **文件系统** - 本地/远程文件访问
+- 🗄️ **数据库** - PostgreSQL, MySQL 等
+- 🌐 **API 集成** - GitHub, Weather 等
+
+**CLI 管理命令**：
+```bash
+copaw mcp list              # 列出所有客户端
+copaw mcp add <name>        # 添加新客户端
+copaw mcp enable <name>     # 启用客户端
+copaw mcp disable <name>    # 禁用客户端
+copaw mcp interactive       # 交互式管理
+```
+
+📖 [MCP 完整指南](docs/mcp/MCP_COMPLETE_GUIDE.md)
+
+---
+
+### 🛠️ Skills 技能管理
+
+Skills 定义 CoPaw 可以做什么，支持分类管理。
+
+**技能分类**：
+- 📄 **文档处理** - PDF, DOCX, PPTX, XLSX
+- 🤖 **自动化** - Cron, 定时任务
+- 🌐 **浏览器** - 网页浏览，信息提取
+- 📰 **信息获取** - 新闻，天气，搜索
+- 💬 **通讯工具** - 邮件，消息发送
+
+**CLI 管理命令**：
+```bash
+copaw skills list           # 列出所有技能
+copaw skills enable <name>  # 启用技能
+copaw skills disable <name> # 禁用技能
+copaw skills search <query> # 搜索 Hub 技能
+copaw skills install <url>  # 安装新技能
+copaw skills interactive    # 交互式管理
+```
+
+📖 [Skills 使用指南](docs/cli/SKILLS_CLI_GUIDE.md)
+
+---
+
+### 🎨 主题切换
+
+支持深色/浅色模式切换，保护你的眼睛。
+
+**切换方式**：
+- 🖱️ **UI 按钮** - 点击控制台右上角主题按钮
+- ⚙️ **系统偏好** - 自动跟随系统主题
+- 💾 **持久化** - 主题偏好本地存储
+
+**主题变量规范**：
+```less
+// 背景色
+--theme-bg-base         // 基础背景
+--theme-bg-container    // 容器背景
+--theme-bg-elevated     // 浮层背景
+
+// 文本色
+--theme-text-primary    // 主文本
+--theme-text-secondary  // 次级文本
+--theme-text-tertiary   // 第三级文本
+
+// 边框色
+--theme-border-primary  // 主边框
+--theme-border-secondary// 次级边框
+```
+
+📖 [主题实现细节](docs/theme/THEME_COMPLETE.md)
+
+---
+
+### 📊 版本控制
+
+为 Skills、记忆文件和 MCP 客户端提供版本追踪能力。
+
+#### Skills 版本控制
+
+```bash
+# 生成版本锁定文件
+copaw skills version lock
+
+# 检查更新
+copaw skills version status
+
+# 更新所有技能
+copaw skills version update --all
+```
+
+#### 记忆文件版本控制
+
+```bash
+# 保存当前版本
+copaw memory version save MEMORY.md
+
+# 查看历史版本
+copaw memory version list MEMORY.md
+
+# 恢复历史版本
+copaw memory version restore <version_path>
+
+# 清理旧版本
+copaw memory version cleanup
+```
+
+#### MCP 版本追踪
+
+```bash
+# 查看 MCP 客户端状态
+copaw mcp version status
+
+# 查看客户端详情
+copaw mcp version info <client>
+
+# 回滚到历史版本
+copaw mcp version rollback <client> <version>
+
+# 健康检查
+copaw mcp version health-check
+```
+
+📖 [版本控制快速入门](docs/VERSION_CONTROL_QUICKSTART.md)  
+📖 [版本控制完整指南](docs/VERSION_CONTROL_USER_GUIDE.md)
+
+---
+
+## CLI 工具
+
+### 完整命令列表
+
+```bash
+# 应用管理
+copaw init              # 初始化配置
+copaw app               # 启动应用
+copaw start             # 启动服务
+copaw restart           # 重启服务
+copaw stop              # 停止服务
+
+# MCP 管理
+copaw mcp list          # 列出客户端
+copaw mcp add           # 添加客户端
+copaw mcp remove        # 删除客户端
+copaw mcp enable        # 启用客户端
+copaw mcp disable       # 禁用客户端
+copaw mcp info          # 查看详情
+copaw mcp export        # 导出配置
+copaw mcp import        # 导入配置
+copaw mcp interactive   # 交互模式
+
+# Skills 管理
+copaw skills list       # 列出技能
+copaw skills info       # 查看详情
+copaw skills enable     # 启用技能
+copaw skills disable    # 禁用技能
+copaw skills config     # 交互配置
+copaw skills search     # 搜索 Hub
+copaw skills install    # 安装技能
+copaw skills export     # 导出配置
+copaw skills import     # 导入配置
+copaw skills interactive# 交互模式
+
+# 版本控制
+copaw skills version lock      # 锁定技能版本
+copaw skills version status    # 检查更新
+copaw skills version update    # 更新技能
+copaw memory version save      # 保存记忆版本
+copaw memory version list      # 查看历史
+copaw memory version restore   # 恢复版本
+copaw mcp version status       # MCP 状态
+copaw mcp version info         # MCP 详情
+copaw mcp version rollback     # MCP 回滚
+
+# 其他
+copaw logs              # 查看日志
+copaw --help            # 查看帮助
+```
+
+📖 [CLI 快速参考](docs/cli/CLI_QUICK_REFERENCE.md)
+
+---
+
+## 认证系统
+
+### 快速配置
+
+**方式 1: 环境变量**
+```bash
+# 在 .env 文件中添加
+AUTH_ENABLED=true
+AUTH_ALLOW_REGISTRATION=true
+AUTH_JWT_SECRET_KEY=your-secret-key
+AUTH_JWT_EXPIRATION_MINUTES=1440
+```
+
+**方式 2: config.json**
+```json
+{
+  "auth": {
+    "enabled": true,
+    "allow_registration": true
+  }
+}
+```
+
+### API 端点
+
+| 端点 | 方法 | 说明 |
+|------|------|------|
+| `/api/auth/login` | POST | 用户登录 |
+| `/api/auth/register` | POST | 用户注册 |
+| `/api/auth/logout` | POST | 用户登出 |
+| `/api/auth/me` | GET | 获取当前用户 |
+| `/api/auth/status` | GET | 认证状态 |
+
+### 安全建议
+
+1. 🔒 **生产环境** - 设置强 `AUTH_JWT_SECRET_KEY`
+2. 🔐 **HTTPS** - 使用 HTTPS 保护传输
+3. 🛡️ **密码策略** - 至少 8 位，包含大小写字母和数字
+4. 🔄 **定期更新** - 定期更新 JWT 密钥和用户密码
+
+📖 [认证配置完整指南](docs/auth/AUTH_GUIDE.md)
+
+---
+
+## API Key 配置
+
+若使用**云端大模型**，需要配置 API Key。
+
+**配置方式**:
+1. **控制台** - 打开 http://127.0.0.1:8088/ → **设置** → **模型**
+2. **环境变量** - 在 `.env` 文件中设置 `DASHSCOPE_API_KEY`
+
+> **仅用本地模型？** 若使用本地模型，则**无需**任何 API Key。
 
 ---
 
 ## 本地模型
 
-CoPaw 可在本机完全本地运行大模型，无需 API Key 或云端服务。详情请见[官方文档](https://copaw.agentscope.io/docs/models#%E6%9C%AC%E5%9C%B0%E6%8F%90%E4%BE%9B%E5%95%86llamacpp--MLX)
+CoPaw 支持本地运行大模型，无需 API Key。
 
-| 后端          | 适用场景                          | 安装                                                                 |
-| ------------- | --------------------------------- | -------------------------------------------------------------------- |
-| **llama.cpp** | 跨平台（macOS / Linux / Windows） | `pip install 'copaw[llamacpp]'` 或 `bash install.sh --extras llamacpp` |
-| **MLX**       | Apple Silicon（M1/M2/M3/M4）      | `pip install 'copaw[mlx]'` 或 `bash install.sh --extras mlx`         |
-| **Ollama**    | 跨平台（需要 Ollama 服务运行）    | `pip install 'copaw[ollama]'` 或 `bash install.sh --extras ollama`   |
-
-安装后可以在 **控制台** 界面中下载与管理本地模型。
-
-也可以用命令行管理模型：
-
-```bash
-copaw models download Qwen/Qwen3-4B-GGUF
-copaw models # 选择已下载的模型
-copaw app # 启动服务
-```
+| 后端 | 适用场景 | 安装 |
+|------|---------|------|
+| **llama.cpp** | 跨平台 | `pip install llama-cpp-python` |
+| **MLX** | Apple Silicon | `pip install mlx-lm` |
+| **Ollama** | 跨平台 | 需运行 Ollama 服务 |
 
 ---
 
-## 文档
+## 文档导航
 
-| 主题                                                      | 说明                                 |
-| --------------------------------------------------------- | ------------------------------------ |
-| [项目介绍](https://copaw.agentscope.io/docs/intro)        | CoPaw 是什么、怎么用                 |
-| [快速开始](https://copaw.agentscope.io/docs/quickstart)   | 安装与运行（本地或魔搭创空间）       |
-| [控制台](https://copaw.agentscope.io/docs/console)        | Web 界面：对话与 Agent 配置          |
-| [模型](https://copaw.agentscope.io/docs/models)        | 配置云/本地/自定义提供商          |
-| [频道配置](https://copaw.agentscope.io/docs/channels)     | 钉钉、飞书、QQ、Discord、iMessage 等 |
-| [Skills](https://copaw.agentscope.io/docs/skills)         | 扩展与自定义能力                     |
-| [MCP](https://copaw.agentscope.io/docs/skills)         | 管理 MCP 客户端                     |
-| [记忆](https://copaw.agentscope.io/docs/memory)           | 上下文管理与长期记忆                 |
-| [魔法命令](https://copaw.agentscope.io/docs/commands)           | 控制对话状态，无需等待AI理解        |
-| [心跳](https://copaw.agentscope.io/docs/heartbeat)        | 定时自检与摘要                       |
-| [配置与工作目录](https://copaw.agentscope.io/docs/config) | 工作目录与配置文件                   |
-| [CLI](https://copaw.agentscope.io/docs/cli)               | 初始化、定时任务、Skills、清理       |
-| [FAQ 常见问题](https://copaw.agentscope.io/docs/faq)               | 常见问题与报错排查                   |
+### 📖 核心文档
 
-完整文档见本仓库 [website/public/docs/](website/public/docs/)。
+| 文档 | 说明 |
+|------|------|
+| [INDEX.md](INDEX.md) | 📍 统一文档索引 |
+| [README.md](README.md) | 项目主文档（英文） |
+| [README_ja.md](README_ja.md) | 项目主文档（日文） |
+
+### 🛠️ 开发文档
+
+| 文档 | 说明 |
+|------|------|
+| [docs/CONTRIBUTING_zh.md](docs/CONTRIBUTING_zh.md) | 贡献者指南 |
+| [docs/TESTING.md](docs/TESTING.md) | 测试指南 |
+| [docs/DEPRECATION_FIXES.md](docs/DEPRECATION_FIXES.md) | 弃用修复报告 |
+
+### 📚 功能文档
+
+| 分类 | 文档 |
+|------|------|
+| **认证系统** | [docs/auth/AUTH_GUIDE.md](docs/auth/AUTH_GUIDE.md) |
+| **MCP 管理** | [docs/mcp/MCP_COMPLETE_GUIDE.md](docs/mcp/MCP_COMPLETE_GUIDE.md) |
+| **Skills 管理** | [docs/cli/SKILLS_CLI_GUIDE.md](docs/cli/SKILLS_CLI_GUIDE.md) |
+| **版本控制** | [docs/VERSION_CONTROL_QUICKSTART.md](docs/VERSION_CONTROL_QUICKSTART.md) |
+| **主题切换** | [docs/theme/THEME_COMPLETE.md](docs/theme/THEME_COMPLETE.md) |
+| **数据库配置** | [docs/dev/DATABASE_CONFIG.md](docs/dev/DATABASE_CONFIG.md) |
+
+### 📊 测试与质量
+
+| 文档 | 说明 |
+|------|------|
+| [docs/TESTING.md](docs/TESTING.md) | 测试指南 - 如何运行测试 |
+| [docs/DEPRECATION_FIXES.md](docs/DEPRECATION_FIXES.md) | 弃用警告修复报告 |
+| [docs/test-reports/](docs/test-reports/) | 测试报告归档 |
+
+📍 [查看完整文档索引](INDEX.md)
 
 ---
 
 ## 常见问题
 
-常见问题、排错指南与已知问题，请访问 **[FAQ 页面](https://copaw.agentscope.io/docs/faq)**。
+### 1. 如何启用认证系统？
+
+在 `config.json` 中添加：
+```json
+{
+  "auth": {
+    "enabled": true,
+    "allow_registration": true
+  }
+}
+```
+
+或在 `.env` 文件中设置：
+```bash
+AUTH_ENABLED=true
+AUTH_ALLOW_REGISTRATION=true
+```
+
+📖 [详细配置指南](docs/auth/AUTH_GUIDE.md)
 
 ---
 
-## 路线图
+### 2. MCP/Skills 分类如何使用？
 
-| 方向 | 事项 | 状态 |
-| --- | --- | --- |
-| 横向拓展 | 更多频道、模型、Skills、MCP 等 — **欢迎社区贡献** | 征集中 |
-| 已有功能扩展与完善 | 展示优化、下载提示、Windows 路径兼容等 — **欢迎社区贡献** | 征集中 |
-| 控制台 Web UI | 在控制台中透出更多信息与配置 | 进行中 |
-| 兼容性与易用性 | 应用级打包（.dmg、.exe） | 进行中 |
-| 自愈 | 魔法命令与 Daemon 能力（CLI、status、restart、logs） | 进行中 |
-| | DaemonAgent：自诊断、自愈与恢复 | 计划中 |
-| 多智能体 | 后台任务支持 | 进行中 |
-| | 多智能体隔离 | 计划中 |
-| | 智能体间竞争与冲突的解决 | 计划中 |
-| | 多智能体通信 | 计划中 |
-| 多模态 | 语音/视频通话与实时交互 | 进行中 |
-| 版本发布与贡献规范 | Vibe Coding 等 Agent 的贡献引导 | 计划中 |
-| Bug 修复与功能增强 | Skills 与 MCP 运行时安装、热加载改进 | 计划中 |
-| 安全 | Shell 执行确认 | 计划中 |
-| | 工具/Skills 安全性 | 计划中 |
-| | 可配置安全等级 | 计划中 |
-| 沙箱 | 与 AgentScope Runtime 沙箱深度集成 | 长期规划 |
-| CoPaw 优化本地模型 | 针对 CoPaw 原生 Skills 与常见任务调优的本地模型，提升个人助理可用性 | 长期规划 |
-| 大小模型协同 | 本地模型处理敏感数据，云端模型负责规划与编码；兼顾隐私、性能与能力 | 长期规划 |
-| 云原生 | 与 AgentScope Runtime 深度集成，充分利用云端算力、存储与工具生态 | 长期规划 |
-| Skills 生态 | 丰富 [AgentScope Skills](https://github.com/agentscope-ai/agentscope-skills) 仓库，提升优质 Skill 的发现与使用 | 长期规划 |
+启动后在控制台界面自动显示分类，无需额外配置。
 
-*状态说明：进行中 — 正在推进；计划中 — 已排期或设计中，也**欢迎贡献**；**征集中** — 我们**非常欢迎**社区参与；长期规划 — 中长期路线。*
+**CLI 管理**：
+```bash
+# MCP 管理
+copaw mcp list
+copaw mcp interactive
 
-### 参与贡献
+# Skills 管理
+copaw skills list
+copaw skills interactive
+```
 
-CoPaw 在开放协作中持续演进，欢迎各种形式的参与！请参考上方 [路线图](#路线图)（尤其是标记为 **征集中** 的项）选择你感兴趣的方向，并阅读 [CONTRIBUTING](https://github.com/agentscope-ai/CoPaw/blob/main/CONTRIBUTING_zh.md) 了解如何开始。我们特别欢迎：
+📖 [MCP 指南](docs/mcp/MCP_COMPLETE_GUIDE.md) | [Skills 指南](docs/cli/SKILLS_CLI_GUIDE.md)
 
-- **横向拓展** — 新频道、模型提供商、Skills、MCP。
-- **已有功能扩展与完善** — 展示与交互优化、下载提示、Windows 路径兼容等。
+---
 
-欢迎在 [GitHub Discussions](https://github.com/agentscope-ai/CoPaw/discussions) 参与讨论、提出想法或认领任务。
+### 3. 如何切换主题？
+
+点击控制台右上角的主题切换按钮即可。
+
+**主题类型**：
+- 🌞 浅色模式
+- 🌙 深色模式
+- 💻 跟随系统
+
+📖 [主题实现细节](docs/theme/THEME_COMPLETE.md)
+
+---
+
+### 4. 如何检查技能更新？
+
+```bash
+# 生成锁定文件
+copaw skills version lock
+
+# 检查更新
+copaw skills version status
+
+# 更新所有
+copaw skills version update --all
+```
+
+📖 [版本控制指南](docs/VERSION_CONTROL_QUICKSTART.md)
+
+---
+
+### 5. MCP 客户端无法启动？
+
+**排查步骤**：
+```bash
+# 1. 检查依赖
+copaw mcp check-deps
+
+# 2. 安装依赖
+copaw mcp install-deps <client>
+
+# 3. 查看状态
+copaw mcp status
+
+# 4. 查看日志
+copaw logs mcp
+```
+
+📖 [MCP 故障排除](docs/mcp/MCP_COMPLETE_GUIDE.md#故障排除)
+
+---
+
+### 6. 如何备份和恢复配置？
+
+**MCP 配置**：
+```bash
+# 导出
+copaw mcp export backup.json
+
+# 导入
+copaw mcp import backup.json
+```
+
+**Skills 配置**：
+```bash
+# 导出
+copaw skills export backup.json
+
+# 导入
+copaw skills import backup.json
+```
+
+---
+
+### 7. 测试如何运行？
+
+```bash
+# 安装开发依赖
+pip install -e ".[dev]"
+
+# 运行所有测试
+pytest
+
+# 运行特定测试
+pytest tests/test_auth.py -v
+
+# 前端测试
+cd console && npm run test
+```
+
+📖 [测试完整指南](docs/TESTING.md)
+
+---
+
+### 8. Docker 部署？
+
+> ⚠️ **注意**: Docker 部署支持正在完善中，建议使用源码部署。
+
+```bash
+# 查看 deploy 目录
+ls deploy/
+
+# Docker Compose (开发中)
+docker-compose up -d
+```
+
+---
+
+### 9. 如何安装 PostgreSQL 和 Redis？
+
+**PostgreSQL 安装**：
+```bash
+# Docker (推荐)
+docker run -d --name copaw-postgres \
+  -e POSTGRES_USER=copaw \
+  -e POSTGRES_PASSWORD=copaw_password \
+  -e POSTGRES_DB=copaw \
+  -p 5432:5432 \
+  postgres:15
+
+# Ubuntu/Debian
+sudo apt-get install postgresql postgresql-contrib
+
+# macOS
+brew install postgresql@15
+```
+
+**Redis 安装**：
+```bash
+# Docker (推荐)
+docker run -d --name copaw-redis \
+  -p 6379:6379 \
+  redis:7
+
+# Ubuntu/Debian
+sudo apt-get install redis-server
+
+# macOS
+brew install redis
+```
+
+📖 [完整数据库配置指南](docs/dev/DATABASE_CONFIG.md)
+
+---
+
+### 10. 数据库连接失败怎么办？
+
+**PostgreSQL 连接失败**：
+```bash
+# 检查服务状态
+docker ps | grep postgres
+# 或
+pg_isready -h localhost -p 5432
+
+# 测试连接
+psql -h localhost -U copaw -d copaw -c "SELECT 1"
+```
+
+**Redis 连接失败**：
+```bash
+# 检查服务状态
+docker ps | grep redis
+# 或
+redis-cli ping  # 期望输出：PONG
+```
+
+**常见错误解决**：
+```bash
+# 认证失败 - 重置密码
+docker exec -it copaw-postgres psql -U postgres \
+  -c "ALTER USER copaw WITH PASSWORD 'new_password';"
+
+# 数据库不存在 - 创建数据库
+docker exec -it copaw-postgres psql -U copaw \
+  -c "CREATE DATABASE copaw;"
+```
+
+---
+
+### 11. 如何备份数据库？
+
+**PostgreSQL 备份**：
+```bash
+# 备份数据库
+pg_dump -h localhost -U copaw copaw > backup.sql
+
+# 恢复数据库
+psql -h localhost -U copaw copaw < backup.sql
+```
+
+**Redis 备份**：
+```bash
+# 保存数据到 RDB 文件
+redis-cli SAVE
+
+# 备份文件位置
+# /var/lib/redis/dump.rdb (Linux)
+# /usr/local/var/db/redis/dump.rdb (macOS)
+```
+
+---
+
+## 参与贡献
+
+欢迎提交 Issue 和 PR！
+
+### 贡献方式
+
+- 🐛 [报告问题](https://github.com/Timexscz/CoPaw/issues)
+- 💡 [功能建议](https://github.com/Timexscz/CoPaw/issues)
+- 🔧 [提交 PR](https://github.com/Timexscz/CoPaw/pulls)
+- 📖 [改进文档](docs/CONTRIBUTING_zh.md)
+
+### 贡献者指南
+
+1. **阅读贡献指南** - [docs/CONTRIBUTING_zh.md](docs/CONTRIBUTING_zh.md)
+2. **设置开发环境** - 见下方"从源码安装"
+3. **运行测试** - 确保所有测试通过
+4. **提交 PR** - 遵循 [Conventional Commits](https://www.conventionalcommits.org/)
+
+### 贡献领域
+
+我们欢迎以下类型的贡献：
+
+| 领域 | 说明 |
+|------|------|
+| 🔌 **新频道** | 添加新的聊天应用支持（钉钉、飞书、QQ 等） |
+| 🧠 **新模型** | 添加新的模型后端或提供商 |
+| 🛠️ **新 Skills** | 创建新的基础技能（文档处理、自动化等） |
+| 🔍 **MCP 工具** | 开发新的 MCP 服务器或工具 |
+| 📚 **文档** | 改进文档、教程、示例 |
+| 🐛 **Bug 修复** | 修复问题、优化性能 |
+| 🌍 **平台支持** | 改进 Windows、Linux、macOS 兼容性 |
+
+📖 [完整贡献指南](docs/CONTRIBUTING_zh.md)
 
 ---
 
 ## 从源码安装
 
+### 开发环境设置
+
 ```bash
-git clone https://github.com/agentscope-ai/CoPaw.git
+# 1. 克隆仓库
+git clone https://github.com/Timexscz/CoPaw.git
 cd CoPaw
 
-# 先构建前端控制台（Web 界面必需）
-cd console && npm ci && npm run build
-cd ..
+# 2. 安装开发依赖
+pip install -e ".[dev]"
 
-# 将控制台构建产物复制到包目录
-mkdir -p src/copaw/console
-cp -R console/dist/. src/copaw/console/
-
-# 安装 Python 包
-pip install -e .
+# 3. 安装 pre-commit
+pre-commit install
 ```
 
-- **开发**（测试、格式化）：`pip install -e ".[dev]"`
-- **然后**：运行 `copaw init --defaults`，再运行 `copaw app`。
+### 运行测试
+
+```bash
+# 后端测试
+pytest tests/ -v
+
+# 前端测试
+cd console && npm install && npm run test
+
+# 生成测试覆盖率
+pytest --cov=copaw --cov-report=html
+```
+
+### 代码质量
+
+```bash
+# 运行 pre-commit
+pre-commit run --all-files
+```
+
+📖 [测试指南](docs/TESTING.md) | [贡献指南](docs/CONTRIBUTING_zh.md)
 
 ---
 
 ## 为什么叫 CoPaw？
 
-CoPaw 既是「你的搭档小爪子」（co-paw），也寓意 **Co Personal Agent Workstation**（协同个人智能体工作台）。我们希望它不是冰冷的工具，而是一只随时准备帮忙的温暖「小爪子」，是你数字生活中最默契的伙伴。
+CoPaw = **Co** Personal **Paw** Assistant Workstation
 
 ---
 
 ## 由谁构建
 
-[AgentScope 团队](https://github.com/agentscope-ai) · [AgentScope](https://github.com/agentscope-ai/agentscope) · [AgentScope Runtime](https://github.com/agentscope-ai/agentscope-runtime) · [ReMe](https://github.com/agentscope-ai/ReMe)
+这是基于官方 [CoPaw](https://github.com/agentscope-ai/CoPaw) 的社区增强版本。
 
----
+**主要贡献**:
+- 🔐 **认证系统** - JWT 认证，保护 API 访问
+- 🔧 **MCP/skills cli 拓展** - 完善的命令行工具
+- 📂 **MCP/Skills 分类管理** - 智能分类
+- 🎨 **主题切换** - 深色/浅色模式
+- 📚 **文档优化** - 统一索引，精简 40%
+- ✅ **测试完善** - 56 个测试 100% 通过
+- 🔧 **弃用修复** - 符合 Pydantic V2、Python 3.12 标准
+- 📊 **版本控制** - Skills、记忆、MCP 版本追踪
 
-## 联系我们
+### 质量指标
 
-| [Discord](https://discord.gg/eYMpfnkG8h)                     | [X (Twitter)](https://x.com/agentscope_ai)                   | [钉钉](https://qr.dingtalk.com/action/joingroup?code=v1,k1,OmDlBXpjW+I2vWjKDsjvI9dhcXjGZi3bQiojOq3dlDw=&_dt_no_comment=1&origin=11) |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [<img src="https://gw.alicdn.com/imgextra/i1/O1CN01hhD1mu1Dd3BWVUvxN_!!6000000000238-2-tps-400-400.png" width="80" height="80" alt="Discord">](https://discord.gg/eYMpfnkG8h) | [<img src="https://img.shields.io/badge/X-black.svg?logo=x&logoColor=white" width="80" height="80" alt="X">](https://x.com/agentscope_ai) | [<img src="https://img.alicdn.com/imgextra/i2/O1CN01vCWI8a1skHtLGXEMQ_!!6000000005804-2-tps-458-460.png" width="80" height="80" alt="钉钉">](https://qr.dingtalk.com/action/joingroup?code=v1,k1,OmDlBXpjW+I2vWjKDsjvI9dhcXjGZi3bQiojOq3dlDw=&_dt_no_comment=1&origin=11) |
+| 指标 | 状态 |
+|------|------|
+| 测试覆盖率 | ✅ 100% (56/56) |
+| 弃用警告 | ✅ 0 个 |
+| 文档精简 | ✅ -46% |
+| 代码规范 | ✅ Pydantic V2 |
+| Python 兼容 | ✅ 3.10-3.13 |
+
+📖 [弃用修复报告](docs/DEPRECATION_FIXES.md) | [文档清理报告](docs/DOCUMENT_CLEANUP_REPORT.md)
 
 ---
 
 ## 许可证
 
-CoPaw 采用 [Apache License 2.0](LICENSE) 开源协议。
+Apache 2.0 License - 与官方 CoPaw 保持一致。
 
 ---
 
-## 贡献者
+## 社区与联系
 
-感谢所有为 CoPaw 做出贡献的朋友们：
+| 平台 | 链接 |
+|------|------|
+| 💬 Discord | [加入社区](https://discord.gg/eYMpfnkG8h) |
+| 🐦 X (Twitter) | [@agentscope_ai](https://x.com/agentscope_ai) |
+| 📱 钉钉 | [扫码加入](https://qr.dingtalk.com/action/joingroup?code=v1,k1,OmDlBXpjW+I2vWjKDsjvI9dhcXjGZi3bQiojOq3dlDw=&_dt_no_comment=1&origin=11) |
+| 🌐 官方网站 | [agentscope.io](https://agentscope.io/) |
 
-<a href="https://github.com/agentscope-ai/CoPaw/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=agentscope-ai/CoPaw" alt="贡献者" />
-</a>
+---
+
+<div align="center">
+
+**CoPaw-CE v0.0.6.ce.1** | 基于 CoPaw v0.0.5.post1
+
+[返回顶部](#-社区增强版)
+
+</div>

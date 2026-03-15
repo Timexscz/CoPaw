@@ -489,5 +489,46 @@
       "viewReleases": "View Releases",
       "close": "Close"
     }
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System"
+  },
+  "settings": {
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "usernamePlaceholder": "Enter your username",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "usernameRequired": "Please input your username!",
+    "passwordRequired": "Please input your password!",
+    "confirmPasswordRequired": "Please confirm your password!",
+    "usernameMin": "Username must be at least 3 characters",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordMismatch": "The two passwords do not match!",
+    "loginSuccess": "Login successful!",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "registerSuccess": "Registration successful!",
+    "registerFailed": "Registration failed. Please try again.",
+    "usernameExists": "Username already exists",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "welcomeTitle": "Welcome to CoPaw",
+    "welcomeSubtitle": "Please sign in to continue",
+    "createTitle": "Create Account",
+    "createSubtitle": "Sign up to get started with CoPaw",
+    "usernameLengthHint": "Username (3-100 characters)",
+    "passwordLengthHint": "Password (at least 6 characters)"
   }
 }

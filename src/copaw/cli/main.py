@@ -87,6 +87,26 @@ from .skills_cmd import skills_group  # noqa: E402
 _record(".skills_cmd", time.perf_counter() - _t)
 
 _t = time.perf_counter()
+from .mcp_cmd import mcp_group  # noqa: E402
+
+_record(".mcp_cmd", time.perf_counter() - _t)
+
+_t = time.perf_counter()
+from .skills_version_cmd import skills_version  # noqa: E402
+
+_record(".skills_version_cmd", time.perf_counter() - _t)
+
+_t = time.perf_counter()
+from .memory_version_cmd import memory_version  # noqa: E402
+
+_record(".memory_version_cmd", time.perf_counter() - _t)
+
+_t = time.perf_counter()
+from .mcp_version_cmd import mcp_version  # noqa: E402
+
+_record(".mcp_version_cmd", time.perf_counter() - _t)
+
+_t = time.perf_counter()
 from .uninstall_cmd import uninstall_cmd  # noqa: E402
 
 _record(".uninstall_cmd", time.perf_counter() - _t)
@@ -139,4 +159,8 @@ cli.add_command(env_group)
 cli.add_command(init_cmd)
 cli.add_command(models_group)
 cli.add_command(skills_group)
+cli.add_command(skills_version)
+cli.add_command(memory_version)
+cli.add_command(mcp_group)
+cli.add_command(mcp_version)
 cli.add_command(uninstall_cmd)

@@ -19,7 +19,7 @@ const useStyles = createStyles(({ css }) => ({
     background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
     color: white;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     border: none;
 
     .ant-card-body {
@@ -67,7 +67,7 @@ const useStyles = createStyles(({ css }) => ({
   mainIcon: css`
     font-size: 48px;
     margin-bottom: 16px;
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
   `,
   condition: css`
     font-size: 16px;

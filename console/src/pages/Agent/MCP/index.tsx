@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button, Empty, Modal } from "@agentscope-ai/design";
+import { DownOutlined, SettingOutlined } from "@ant-design/icons";
 import type { MCPClientInfo } from "../../../api/types";
-import { MCPClientCard } from "./components";
+import { MCPClientRow, MCPCategoryManager } from "./components";
 import { useMCP } from "./useMCP";
 import { useTranslation } from "react-i18next";
+import { categorizeMCP, getAllMCPCategories } from "../../../config/mcpCategories";
+import styles from "./index.module.less";
 
 type MCPTransport = "stdio" | "streamable_http" | "sse";
 
@@ -58,7 +61,6 @@ function MCPPage() {
     createClient,
     updateClient,
   } = useMCP();
-  const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [newClientJson, setNewClientJson] = useState(`{
   "mcpServers": {
@@ -71,6 +73,28 @@ function MCPPage() {
     }
   }
 }`);
+  const [categoryManagerOpen, setCategoryManagerOpen] = useState(false);
+
+  // Collapsed state for categories (persisted in localStorage)
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>(() => {
+    const saved = localStorage.getItem("mcp_collapsed_categories");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return {};
+      }
+    }
+    return {};
+  });
+
+  const handleToggleCategory = (categoryId: string) => {
+    setCollapsedCategories(prev => {
+      const next = { ...prev, [categoryId]: !prev[categoryId] };
+      localStorage.setItem("mcp_collapsed_categories", JSON.stringify(next));
+      return next;
+    });
+  };
 
   const handleToggleEnabled = async (
     client: MCPClientInfo,
@@ -157,55 +181,116 @@ function MCPPage() {
     }
   };
 
+  // Group clients by intelligent category (based on transport and content analysis)
+  const groupedClients = useMemo(() => {
+    const groups: Record<string, MCPClientInfo[]> = {};
+
+    clients.forEach((client) => {
+      // Use intelligent categorization based on client configuration
+      const category = categorizeMCP({
+        name: client.name,
+        description: client.description,
+        transport: client.transport,
+        command: client.command,
+        url: client.url,
+      });
+      
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(client);
+    });
+
+    // Sort clients within each group: enabled first, then by name
+    Object.keys(groups).forEach((type) => {
+      groups[type].sort((a, b) => {
+        if (a.enabled && !b.enabled) return -1;
+        if (!a.enabled && b.enabled) return 1;
+        return a.name.localeCompare(b.name);
+      });
+    });
+
+    return groups;
+  }, [clients]);
+
   return (
-    <div style={{ padding: 24 }}>
+    <div className={styles.mcpPage}>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 16,
-        }}
+        className={styles.mcpHeader}
       >
         <div>
-          <h1 style={{ fontSize: 24, fontWeight: 600, marginBottom: 4 }}>
+          <h1 className={styles.mcpTitle}>
             {t("mcp.title")}
           </h1>
-          <p style={{ margin: 0, color: "#999", fontSize: 14 }}>
+          <p className={styles.mcpDescription}>
             {t("mcp.description")}
           </p>
         </div>
-        <Button type="primary" onClick={() => setCreateModalOpen(true)}>
-          {t("mcp.create")}
-        </Button>
+        <div className={styles.mcpActions}>
+          <Button
+            type="default"
+            onClick={() => setCategoryManagerOpen(true)}
+            icon={<SettingOutlined />}
+          >
+            分类管理
+          </Button>
+          <Button type="primary" onClick={() => setCreateModalOpen(true)}>
+            {t("mcp.create")}
+          </Button>
+        </div>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: 60 }}>
-          <p style={{ color: "#999" }}>{t("common.loading")}</p>
+        <div className={styles.mcpLoading}>
+          <p className={styles.mcpLoadingText}>{t("common.loading")}</p>
         </div>
       ) : clients.length === 0 ? (
         <Empty description={t("mcp.emptyState")} />
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-            gap: 20,
-          }}
-        >
-          {clients.map((client) => (
-            <MCPClientCard
-              key={client.key}
-              client={client}
-              onToggle={handleToggleEnabled}
-              onDelete={handleDelete}
-              onUpdate={updateClient}
-              isHovered={hoverKey === client.key}
-              onMouseEnter={() => setHoverKey(client.key)}
-              onMouseLeave={() => setHoverKey(null)}
-            />
-          ))}
+        <div className={styles.mcpGroups}>
+          {getAllMCPCategories().map((category) => {
+            const categoryClients = groupedClients[category.id] || [];
+            if (categoryClients.length === 0) return null;
+            
+            const isCollapsed = collapsedCategories[category.id] ?? false;
+            
+            return (
+              <div key={category.id} className={styles.mcpGroup}>
+                <div
+                  className={styles.mcpGroupHeader}
+                  onClick={() => handleToggleCategory(category.id)}
+                >
+                  <h2 className={styles.mcpGroupTitle}>
+                    <span style={{ color: category.color }}>
+                      {category.icon} {category.name}
+                    </span>
+                    <span className={styles.mcpGroupCount}>
+                      ({categoryClients.length})
+                    </span>
+                  </h2>
+                  <DownOutlined
+                    className={styles.mcpGroupIcon}
+                    style={{
+                      transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </div>
+                {!isCollapsed && (
+                  <div className={styles.mcpGroupContent}>
+                    {categoryClients.map((client) => (
+                      <MCPClientRow
+                        key={client.key}
+                        client={client}
+                        onToggle={handleToggleEnabled}
+                        onDelete={handleDelete}
+                        onUpdate={updateClient}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -214,10 +299,10 @@ function MCPPage() {
         open={createModalOpen}
         onCancel={() => setCreateModalOpen(false)}
         footer={
-          <div style={{ textAlign: "right" }}>
+          <div className={styles.mcpModalFooter}>
             <Button
               onClick={() => setCreateModalOpen(false)}
-              style={{ marginRight: 8 }}
+              className={styles.mcpModalBtn}
             >
               {t("common.cancel")}
             </Button>
@@ -228,18 +313,11 @@ function MCPPage() {
         }
         width={800}
       >
-        <div style={{ marginBottom: 12 }}>
-          <p style={{ margin: 0, fontSize: 13, color: "#666" }}>
+        <div className={styles.mcpModalHint}>
+          <p className={styles.mcpModalHintTitle}>
             {t("mcp.formatSupport")}:
           </p>
-          <ul
-            style={{
-              margin: "8px 0",
-              padding: "0 0 0 20px",
-              fontSize: 12,
-              color: "#999",
-            }}
-          >
+          <ul className={styles.mcpModalHintList}>
             <li>
               Standard format:{" "}
               <code>{`{ "mcpServers": { "key": {...} } }`}</code>
@@ -256,18 +334,14 @@ function MCPPage() {
         <textarea
           value={newClientJson}
           onChange={(e) => setNewClientJson(e.target.value)}
-          style={{
-            width: "100%",
-            minHeight: 400,
-            fontFamily: "Monaco, Courier New, monospace",
-            fontSize: 13,
-            padding: 16,
-            border: "1px solid #d9d9d9",
-            borderRadius: 4,
-            resize: "vertical",
-          }}
+          className={styles.mcpModalTextarea}
         />
       </Modal>
+
+      <MCPCategoryManager
+        open={categoryManagerOpen}
+        onClose={() => setCategoryManagerOpen(false)}
+      />
     </div>
   );
 }

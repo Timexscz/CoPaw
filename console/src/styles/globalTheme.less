@@ -1,0 +1,158 @@
+/**
+ * Global Theme Variables
+ * Standard naming convention: --theme-{category}-{property}
+ */
+
+:root {
+  // ===== Light Theme (Default) =====
+  
+  // Colors - Background
+  --theme-bg-base: #ffffff;
+  --theme-bg-secondary: #fafafa;
+  --theme-bg-tertiary: #f5f5f5;
+  --theme-bg-elevated: #ffffff;
+  --theme-bg-container: #ffffff;
+  --theme-bg-layout: #f0f2f5;
+  
+  // Colors - Text
+  --theme-text-primary: rgba(0, 0, 0, 0.85);
+  --theme-text-secondary: rgba(0, 0, 0, 0.65);
+  --theme-text-tertiary: rgba(0, 0, 0, 0.45);
+  --theme-text-disabled: rgba(0, 0, 0, 0.25);
+  
+  // Colors - Border
+  --theme-border-primary: rgba(0, 0, 0, 0.12);
+  --theme-border-secondary: rgba(0, 0, 0, 0.08);
+  --theme-border-light: rgba(0, 0, 0, 0.05);
+  
+  // Colors - Primary
+  --theme-primary: #1890ff;
+  --theme-primary-hover: #40a9ff;
+  --theme-primary-active: #096dd9;
+  --theme-primary-light: rgba(24, 144, 255, 0.1);
+  --theme-primary-bg: rgba(24, 144, 255, 0.05);
+  
+  // Colors - Success
+  --theme-success: #52c41a;
+  --theme-success-bg: rgba(82, 196, 26, 0.1);
+  --theme-success-border: rgba(82, 196, 26, 0.2);
+  
+  // Colors - Warning
+  --theme-warning: #faad14;
+  --theme-warning-bg: rgba(250, 173, 20, 0.1);
+  --theme-warning-border: rgba(250, 173, 20, 0.2);
+  
+  // Colors - Error
+  --theme-error: #ff4d4f;
+  --theme-error-bg: rgba(255, 77, 79, 0.1);
+  --theme-error-border: rgba(255, 77, 79, 0.2);
+  
+  // Colors - Info
+  --theme-info: #1890ff;
+  --theme-info-bg: rgba(24, 144, 255, 0.1);
+  --theme-info-border: rgba(24, 144, 255, 0.2);
+  
+  // Shadows
+  --theme-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+                     0 1px 6px -1px rgba(0, 0, 0, 0.02),
+                     0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  --theme-shadow-md: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+                     0 6px 16px 0 rgba(0, 0, 0, 0.08),
+                     0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --theme-shadow-lg: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+                     0 3px 6px -4px rgba(0, 0, 0, 0.12),
+                     0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  
+  // Scrollbar
+  --theme-scrollbar-bg: rgba(0, 0, 0, 0.1);
+  --theme-scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+  
+  // Input
+  --theme-input-bg: #ffffff;
+  --theme-input-border: rgba(0, 0, 0, 0.12);
+  --theme-input-hover-border: rgba(0, 0, 0, 0.3);
+  --theme-input-active-border: #1890ff;
+  
+  // Hover states
+  --theme-hover-bg: rgba(0, 0, 0, 0.04);
+  --theme-selected-bg: rgba(24, 144, 255, 0.1);
+  --theme-active-bg: rgba(24, 144, 255, 0.05);
+}
+
+// ===== Dark Theme =====
+:root[data-theme='dark'] {
+  // Colors - Background
+  --theme-bg-base: #000000;
+  --theme-bg-secondary: #141414;
+  --theme-bg-tertiary: #1f1f1f;
+  --theme-bg-elevated: #262626;
+  --theme-bg-container: #1f1f1f;
+  --theme-bg-layout: #000000;
+
+  // Colors - Text
+  --theme-text-primary: rgba(255, 255, 255, 0.85);
+  --theme-text-secondary: rgba(255, 255, 255, 0.65);
+  --theme-text-tertiary: rgba(255, 255, 255, 0.45);
+  --theme-text-disabled: rgba(255, 255, 255, 0.25);
+
+  // Colors - Border
+  --theme-border-primary: rgba(255, 255, 255, 0.12);
+  --theme-border-secondary: rgba(255, 255, 255, 0.08);
+  --theme-border-light: rgba(255, 255, 255, 0.05);
+
+  // Colors - Primary
+  --theme-primary: #177ddc;
+  --theme-primary-hover: #4096ff;
+  --theme-primary-active: #0958b9;
+  --theme-primary-light: rgba(23, 125, 220, 0.15);
+  --theme-primary-bg: rgba(23, 125, 220, 0.1);
+
+  // Colors - Success
+  --theme-success: #389e0d;
+  --theme-success-bg: rgba(56, 152, 13, 0.15);
+  --theme-success-border: rgba(56, 152, 13, 0.25);
+
+  // Colors - Warning
+  --theme-warning: #d89614;
+  --theme-warning-bg: rgba(216, 150, 20, 0.15);
+  --theme-warning-border: rgba(216, 150, 20, 0.25);
+
+  // Colors - Error
+  --theme-error: #d9363e;
+  --theme-error-bg: rgba(217, 54, 62, 0.15);
+  --theme-error-border: rgba(217, 54, 62, 0.25);
+
+  // Colors - Info
+  --theme-info: #177ddc;
+  --theme-info-bg: rgba(23, 125, 220, 0.15);
+  --theme-info-border: rgba(23, 125, 220, 0.25);
+
+  // Shadows - Refined for better button appearance in dark mode
+  // Reduced opacity and vertical offset set to 0 for even shadow distribution
+  --theme-shadow-sm: 0 0 2px 0 rgba(0, 0, 0, 0.15),
+                     0 0 6px -1px rgba(0, 0, 0, 0.2),
+                     0 0 4px 0 rgba(0, 0, 0, 0.1);
+  --theme-shadow-md: 0 0 6px -4px rgba(0, 0, 0, 0.24),
+                     0 0 16px 0 rgba(0, 0, 0, 0.16),
+                     0 0 28px 8px rgba(0, 0, 0, 0.1);
+  --theme-shadow-lg: 0 0 16px 0 rgba(0, 0, 0, 0.16),
+                     0 0 6px -4px rgba(0, 0, 0, 0.24),
+                     0 0 28px 8px rgba(0, 0, 0, 0.1);
+  
+  // Scrollbar
+  --theme-scrollbar-bg: rgba(255, 255, 255, 0.1);
+  --theme-scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+  
+  // Input
+  --theme-input-bg: #141414;
+  --theme-input-border: rgba(255, 255, 255, 0.12);
+  --theme-input-hover-border: rgba(255, 255, 255, 0.3);
+  --theme-input-active-border: #177ddc;
+  
+  // Hover states
+  --theme-hover-bg: rgba(255, 255, 255, 0.08);
+  --theme-selected-bg: rgba(23, 125, 220, 0.15);
+  --theme-active-bg: rgba(23, 125, 220, 0.1);
+}

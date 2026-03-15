@@ -4,6 +4,9 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 import ConsoleCronBubble from "../../components/ConsoleCronBubble";
+import { useAuth } from "../../contexts/AuthContext";
+import LoginPage from "../../pages/Auth/LoginPage";
+import RegisterPage from "../../pages/Auth/RegisterPage";
 import styles from "../index.module.less";
 import Chat from "../../pages/Chat";
 import ChannelsPage from "../../pages/Control/Channels";
@@ -16,6 +19,16 @@ import WorkspacePage from "../../pages/Agent/Workspace";
 import MCPPage from "../../pages/Agent/MCP";
 import ModelsPage from "../../pages/Settings/Models";
 import EnvironmentsPage from "../../pages/Settings/Environments";
+
+// Add CSS for spin animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+document.head.appendChild(style);
 
 const { Content } = Layout;
 
@@ -39,12 +52,58 @@ export default function MainLayout() {
   const navigate = useNavigate();
   const currentPath = location.pathname;
   const selectedKey = pathToKey[currentPath] || "chat";
+  const { authEnabled, authenticated, loading } = useAuth();
 
+  // Redirect to login if auth is enabled and user is not authenticated
   useEffect(() => {
-    if (currentPath === "/") {
-      navigate("/chat", { replace: true });
+    if (!loading && authEnabled && !authenticated) {
+      const publicPaths = ["/login", "/register"];
+      if (!publicPaths.includes(currentPath)) {
+        navigate("/login", { replace: true, state: { from: location } });
+      }
     }
-  }, [currentPath, navigate]);
+  }, [authEnabled, authenticated, loading, currentPath, navigate, location]);
+
+  // Show loading spinner while checking auth status
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        backgroundColor: 'var(--theme-bg-layout, #f0f2f5)',
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: 32,
+            height: 32,
+            border: '3px solid var(--theme-border-primary, #d9d9d9)',
+            borderTop: '3px solid var(--theme-primary, #1890ff)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px',
+          }} />
+          <p style={{
+            color: 'var(--theme-text-secondary, rgba(0, 0, 0, 0.65))',
+            fontSize: 14,
+            margin: 0,
+          }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show auth pages if auth is enabled
+  if (authEnabled && !authenticated && !loading) {
+    return (
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<LoginPage />} />
+      </Routes>
+    );
+  }
 
   return (
     <Layout className={styles.mainLayout}>
@@ -66,6 +125,8 @@ export default function MainLayout() {
               <Route path="/models" element={<ModelsPage />} />
               <Route path="/environments" element={<EnvironmentsPage />} />
               <Route path="/agent-config" element={<AgentConfigPage />} />
+              <Route path="/login" element={<Chat />} />
+              <Route path="/register" element={<Chat />} />
               <Route path="/" element={<Chat />} />
             </Routes>
           </div>

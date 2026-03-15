@@ -7,6 +7,7 @@ from ..constant import (
     HEARTBEAT_DEFAULT_EVERY,
     HEARTBEAT_DEFAULT_TARGET,
 )
+from .auth import OAuthConfig
 
 
 class BaseChannelConfig(BaseModel):
@@ -290,6 +291,18 @@ class MCPConfig(BaseModel):
     )
 
 
+class AuthConfig(BaseModel):
+    """Authentication configuration (stored in config.json)."""
+
+    model_config = ConfigDict(extra="allow")
+
+    # Local auth (username/password)
+    enabled: bool = False
+    allow_registration: bool = True
+    # OAuth providers (optional)
+    oauth: Optional[OAuthConfig] = None
+
+
 class Config(BaseModel):
     """Root config (config.json)."""
 
@@ -300,6 +313,8 @@ class Config(BaseModel):
     last_dispatch: Optional[LastDispatchConfig] = None
     # When False, channel output hides tool call/result details (show "...").
     show_tool_details: bool = True
+    # Authentication configuration
+    auth: AuthConfig = Field(default_factory=AuthConfig)
 
 
 ChannelConfigUnion = Union[

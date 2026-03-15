@@ -16,7 +16,7 @@
 }
 
 .description {
-  color: #999;
+  color: var(--theme-text-tertiary);
   font-size: 14px;
   margin: 0;
 }
@@ -25,7 +25,7 @@
   display: flex;
   gap: 4px;
   padding: 4px;
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--theme-hover-bg);
   border-radius: 10px;
   align-self: center;
 }
@@ -36,21 +36,21 @@
   border: none;
   background: transparent;
   font-size: 13px;
-  color: #666;
+  color: var(--theme-text-secondary);
   cursor: pointer;
   transition: all 0.18s ease;
 
   &:hover {
-    color: #333;
-    background: rgba(0, 0, 0, 0.04);
+    color: var(--theme-text-primary);
+    background: var(--theme-hover-bg);
   }
 }
 
 .filterTabActive {
-  background: #fff;
-  color: #615ced;
+  background: var(--theme-bg-container);
+  color: var(--theme-primary);
   font-weight: 500;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--theme-shadow-sm);
 }
 
 .loading {
@@ -59,7 +59,7 @@
 }
 
 .loadingText {
-  color: #999;
+  color: var(--theme-text-tertiary);
 }
 
 .channelsGrid {
@@ -74,21 +74,22 @@
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  background: var(--theme-bg-container);
 
   &.hover {
-    border: 2px solid #615ced;
-    box-shadow: 0 12px 32px rgba(97, 92, 237, 0.3);
+    border: 2px solid var(--theme-primary);
+    box-shadow: var(--theme-shadow-lg);
   }
 
   &.enabled {
-    border: 2px solid #615ced;
-    box-shadow: 0 8px 24px rgba(97, 92, 237, 0.2);
+    border: 2px solid var(--theme-primary);
+    box-shadow: var(--theme-shadow-md);
     transform: scale(1.02);
   }
 
   &.normal {
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--theme-border-secondary);
+    box-shadow: var(--theme-shadow-sm);
     transform: scale(1);
   }
 }
@@ -114,8 +115,8 @@
 
 .builtinTag {
   font-size: 10px;
-  color: #615ced;
-  background: rgba(97, 92, 237, 0.1);
+  color: var(--theme-primary);
+  background: var(--theme-primary-bg);
   border-radius: 4px;
   padding: 1px 6px;
   white-space: nowrap;
@@ -124,8 +125,8 @@
 
 .customTag {
   font-size: 10px;
-  color: #fa8c16;
-  background: rgba(250, 140, 22, 0.1);
+  color: var(--theme-warning);
+  background: var(--theme-warning-bg);
   border: none;
   border-radius: 4px;
   padding: 1px 6px;
@@ -140,7 +141,7 @@
   justify-content: center;
   gap: 8px;
   font-size: 12px;
-  color: #999;
+  color: var(--theme-text-tertiary);
 }
 
 .statusDot {
@@ -149,22 +150,22 @@
   border-radius: 50%;
 
   &.enabled {
-    background-color: #52c41a;
-    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+    background-color: var(--theme-success);
+    box-shadow: 0 0 0 2px var(--theme-success-bg);
   }
 
   &.disabled {
-    background-color: #d9d9d9;
+    background-color: var(--theme-text-disabled);
     box-shadow: none;
   }
 }
 
 .channelTag {
   font-size: 12px;
-  color: #b37feb;
+  color: var(--theme-primary);
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(97, 92, 237, 0.08);
+  background: var(--theme-primary-bg);
 }
 
 .cardTitle {
@@ -180,13 +181,13 @@
 
 .cardDescription {
   font-size: 12px;
-  color: #999;
+  color: var(--theme-text-tertiary);
   margin-bottom: 12px;
 }
 
 .cardHint {
   font-size: 12px;
-  color: #bbb;
+  color: var(--theme-text-disabled);
 }
 
 /* ---- Channel Drawer Styles ---- */

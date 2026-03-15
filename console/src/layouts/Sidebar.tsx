@@ -34,6 +34,7 @@ import {
   Copy,
   Check,
 } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
 import api from "../api";
 import styles from "./index.module.less";
 
@@ -186,6 +187,7 @@ function CopyButton({ text }: { text: string }) {
 export default function Sidebar({ selectedKey }: SidebarProps) {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { isDark } = useTheme();
   const [collapsed, setCollapsed] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>(DEFAULT_OPEN_KEYS);
   const [version, setVersion] = useState<string>("");
@@ -350,9 +352,17 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       <div className={styles.siderTop}>
         {!collapsed && (
           <div className={styles.logoWrapper}>
-            <img src="/logo.png" alt="CoPaw" className={styles.logoImg} />
+            <img
+              src="/logo.png"
+              alt="CoPaw Logo"
+              className={styles.logoImg}
+              style={{ 
+                maxWidth: '200px',
+                filter: isDark ? 'brightness(0) invert(1)' : 'none'
+              }}
+            />
             {version && (
-              <Badge dot={!!hasUpdate} color="red" offset={[4, 18]}>
+              <Badge dot={!!hasUpdate} color={isDark ? '#ff4d4f' : 'red'} offset={[4, 18]}>
                 <span
                   className={`${styles.versionBadge} ${
                     hasUpdate

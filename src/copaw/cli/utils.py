@@ -67,6 +67,32 @@ def prompt_path(label: str, *, default: str = "") -> str:
         # Otherwise loop and re-prompt
 
 
+def prompt_text(
+    question: str,
+    *,
+    default: str = "",
+    password: bool = False,
+) -> str:
+    """Ask the user for a text input.
+
+    Args:
+        question: Prompt text shown to the user.
+        default:  Pre-filled default value.
+        password: Hide input (for passwords, tokens, etc.).
+
+    Returns:
+        The entered text, or default if user just presses Enter.
+        Falls back to default on Ctrl+C.
+    """
+    result = click.prompt(
+        question,
+        default=default,
+        type=str,
+        hide_input=password,
+    )
+    return result
+
+
 def prompt_choice(
     question: str,
     options: list[str],

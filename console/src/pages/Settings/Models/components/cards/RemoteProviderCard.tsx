@@ -95,9 +95,9 @@ export function RemoteProviderCard({
     ? "#faad14"
     : "#d9d9d9";
   const statusDotShadow = isAvailable
-    ? "0 0 0 2px rgba(82, 196, 26, 0.2)"
+    ? "0 0 0 2px rgba(56, 152, 13, 0.3)"
     : isConfigured
-    ? "0 0 0 2px rgba(250, 173, 20, 0.2)"
+    ? "0 0 0 2px rgba(216, 150, 20, 0.3)"
     : "none";
 
   return (

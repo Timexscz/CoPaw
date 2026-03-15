@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Drawer, Form, Input, Button, message } from "@agentscope-ai/design";
+import { Drawer, Form, Input, Button, message, Select } from "@agentscope-ai/design";
 import { useTranslation } from "react-i18next";
 import type { FormInstance } from "antd";
 import type { SkillSpec } from "../../../../api/types";
 import { MarkdownCopy } from "../../../../components/MarkdownCopy/MarkdownCopy";
+import { getEnabledCategories, categorizeSkill } from "../../../../config/skillCategories";
 
 /**
  * Parse frontmatter from content string.
@@ -49,8 +50,12 @@ export function SkillDrawer({
   onContentChange,
 }: SkillDrawerProps) {
   const { t } = useTranslation();
-  const [showMarkdown, setShowMarkdown] = useState(true);
+  const [showMarkdown, setShowMarkdown] = useState(false);
   const [contentValue, setContentValue] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [aiRecommendations, setAiRecommendations] = useState<Array<{ categoryId: string; confidence: number; reason: string }>>([]);
+
+  const categories = getEnabledCategories();
 
   const validateFrontmatter = useCallback(
     (_: unknown, value: string) => {
@@ -82,9 +87,19 @@ export function SkillDrawer({
         name: editingSkill.name,
         content: editingSkill.content,
       });
+      // Auto-categorize and get AI recommendations
+      const category = categorizeSkill({
+        name: editingSkill.name,
+        description: editingSkill.content,
+        content: editingSkill.content,
+      });
+      setSelectedCategory(category);
+      // AI recommendations would be called here if we had an API
     } else {
       setContentValue("");
       form.resetFields();
+      setSelectedCategory("");
+      setAiRecommendations([]);
     }
   }, [editingSkill, form]);
 
@@ -172,6 +187,32 @@ export function SkillDrawer({
           <>
             <Form.Item name="name" label="name">
               <Input disabled />
+            </Form.Item>
+
+            <Form.Item
+              label="分类"
+              extra="AI 推荐分类，可手动调整"
+            >
+              <Select
+                value={selectedCategory}
+                onChange={setSelectedCategory}
+                options={categories.map(cat => ({
+                  label: `${cat.icon} ${cat.name}`,
+                  value: cat.id,
+                }))}
+                style={{ width: "100%" }}
+              />
+              {aiRecommendations.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 12, color: "#666" }}>
+                  <strong>AI 推荐：</strong>
+                  {aiRecommendations.map((rec, i) => (
+                    <div key={rec.categoryId}>
+                      {i + 1}. {categories.find(c => c.id === rec.categoryId)?.name} 
+                      ({rec.confidence}% 匹配) - {rec.reason}
+                    </div>
+                  ))}
+                </div>
+              )}
             </Form.Item>
 
             <Form.Item name="content" label="Content">

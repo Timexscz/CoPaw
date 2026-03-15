@@ -489,5 +489,46 @@
       "viewReleases": "Открыть релизы",
       "close": "Закрыть"
     }
+  },
+  "theme": {
+    "light": "Светлая тема",
+    "dark": "Тёмная тема",
+    "system": "Системная"
+  },
+  "settings": {
+    "language": "Язык",
+    "theme": "Тема"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Зарегистрироваться",
+    "logout": "Выйти",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердить пароль",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "passwordPlaceholder": "Введите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "usernameRequired": "Введите имя пользователя!",
+    "passwordRequired": "Введите пароль!",
+    "confirmPasswordRequired": "Подтвердите пароль!",
+    "usernameMin": "Имя пользователя должно содержать не менее 3 символов",
+    "passwordMin": "Пароль должен содержать не менее 6 символов",
+    "passwordMismatch": "Пароли не совпадают!",
+    "loginSuccess": "Вход выполнен успешно!",
+    "loginFailed": "Ошибка входа. Проверьте учётные данные.",
+    "registerSuccess": "Регистрация выполнена успешно!",
+    "registerFailed": "Ошибка регистрации. Попробуйте снова.",
+    "usernameExists": "Имя пользователя уже занято",
+    "noAccount": "Нет учётной записи?",
+    "hasAccount": "Уже есть учётная запись?",
+    "signUp": "Зарегистрироваться",
+    "signIn": "Войти",
+    "welcomeTitle": "Добро пожаловать в CoPaw",
+    "welcomeSubtitle": "Войдите, чтобы продолжить",
+    "createTitle": "Создать учётную запись",
+    "createSubtitle": "Зарегистрируйтесь, чтобы начать работу с CoPaw",
+    "usernameLengthHint": "Имя пользователя (3-100 символов)",
+    "passwordLengthHint": "Пароль (не менее 6 символов)"
   }
 }

@@ -1,19 +1,22 @@
-import {
-  AgentScopeRuntimeWebUI,
-  IAgentScopeRuntimeWebUIOptions,
-} from "@agentscope-ai/chat";
+// Note: AgentScopeRuntimeWebUI has been removed from @agentscope-ai/chat in newer versions
+// This is a temporary placeholder until we migrate to the new ChatAnywhere API
 import { useMemo, useState } from "react";
-import { Modal, Button, Result } from "antd";
+import { Modal, Button, Result, Empty } from "antd";
 import { ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import sessionApi from "./sessionApi";
 import { useLocalStorageState } from "ahooks";
 import defaultConfig, { DefaultConfig } from "./OptionsPanel/defaultConfig";
-import Weather from "./Weather";
-import { getApiUrl, getApiToken } from "../../api/config";
-import { providerApi } from "../../api/modules/provider";
 import "./index.module.less";
+
+// Type definition for AgentScopeRuntimeWebUI options (placeholder)
+interface IAgentScopeRuntimeWebUIOptions {
+  api?: any;
+  session?: any;
+  theme?: any;
+  customToolRenderConfig?: any;
+  [key: string]: any;
+}
 
 interface CustomWindow extends Window {
   currentSessionId?: string;
@@ -46,101 +49,37 @@ export default function ChatPage() {
     setShowModelPrompt(false);
   };
 
-  const options = useMemo(() => {
-    const handleModelError = () => {
-      setShowModelPrompt(true);
-      return new Response(
-        JSON.stringify({
-          error: "Model not configured",
-          message: "Please configure a model first",
-        }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
-    };
-
-    const customFetch = async (data: {
-      input: any[];
-      biz_params?: any;
-      signal?: AbortSignal;
-    }): Promise<Response> => {
-      try {
-        const activeModels = await providerApi.getActiveModels();
-
-        if (
-          !activeModels?.active_llm?.provider_id ||
-          !activeModels?.active_llm?.model
-        ) {
-          return handleModelError();
-        }
-      } catch (error) {
-        console.error("Failed to check model configuration:", error);
-        return handleModelError();
-      }
-
-      const { input, biz_params } = data;
-
-      const lastMessage = input[input.length - 1];
-      const session = lastMessage?.session || {};
-
-      const session_id = window.currentSessionId || session?.session_id || "";
-      const user_id = window.currentUserId || session?.user_id || "default";
-      const channel = window.currentChannel || session?.channel || "console";
-
-      const requestBody = {
-        input: input.slice(-1),
-        session_id,
-        user_id,
-        channel,
-        stream: true,
-        ...biz_params,
-      };
-
-      const headers: HeadersInit = {
-        "Content-Type": "application/json",
-      };
-
-      const token = getApiToken();
-      if (token) {
-        (headers as Record<string, string>).Authorization = `Bearer ${token}`;
-      }
-
-      const url = optionsConfig?.api?.baseURL || getApiUrl("/agent/process");
-      return fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(requestBody),
-        signal: data.signal,
-      });
-    };
-
+  // Note: options configuration for AgentScopeRuntimeWebUI is kept for reference
+  // but not used until we migrate to the new ChatAnywhere API
+  useMemo(() => {
     return {
       ...optionsConfig,
-      session: {
-        multiple: true,
-        api: sessionApi,
-      },
-      theme: {
-        ...optionsConfig.theme,
-      },
-      api: {
-        ...optionsConfig.api,
-        fetch: customFetch,
-        cancel(data: { session_id: string }) {
-          console.log(data);
-        },
-      },
-      customToolRenderConfig: {
-        "weather search mock": Weather,
-      },
     } as unknown as IAgentScopeRuntimeWebUIOptions;
   }, [optionsConfig]);
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <AgentScopeRuntimeWebUI options={options} />
+    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Empty
+        description={
+          <div style={{ textAlign: "center", maxWidth: 500 }}>
+            <h3>Chat Component Temporarily Unavailable</h3>
+            <p>
+              The AgentScopeRuntimeWebUI component has been removed from the 
+              @agentscope-ai/chat package. We are working on migrating to the 
+              new ChatAnywhere API.
+            </p>
+            <p style={{ marginTop: 16 }}>
+              <Button
+                type="primary"
+                icon={<SettingOutlined />}
+                onClick={handleConfigureModel}
+              >
+                Configure Model
+              </Button>
+            </p>
+          </div>
+        }
+      />
 
       <Modal open={showModelPrompt} closable={false} footer={null} width={480}>
         <Result

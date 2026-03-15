@@ -1,4 +1,4 @@
-import { getApiUrl, getApiToken } from "./config";
+import { getApiUrl, getApiToken, setApiToken } from "./config";
 
 function buildHeaders(method?: string, extra?: HeadersInit): Headers {
   // Normalize extra to a Headers instance for consistent handling
@@ -21,7 +21,7 @@ function buildHeaders(method?: string, extra?: HeadersInit): Headers {
   return headers;
 }
 
-export async function request<T = unknown>(
+async function request<T = unknown>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
@@ -36,6 +36,16 @@ export async function request<T = unknown>(
 
   if (!response.ok) {
     const text = await response.text().catch(() => "");
+
+    // Handle 401 Unauthorized - clear token and redirect to login
+    // Skip this for auth endpoints to prevent redirect loops
+    if (response.status === 401 && !path.startsWith("/api/auth/")) {
+      setApiToken(null);
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+
     throw new Error(
       `Request failed: ${response.status} ${response.statusText}${
         text ? ` - ${text}` : ""
@@ -54,3 +64,32 @@ export async function request<T = unknown>(
 
   return (await response.json()) as T;
 }
+
+// Helper methods for common HTTP verbs
+request.get = <T = unknown>(path: string, options: RequestInit = {}): Promise<T> => {
+  return request<T>(path, { ...options, method: "GET" });
+};
+
+request.post = <T = unknown>(path: string, data?: any, options: RequestInit = {}): Promise<T> => {
+  const body = data ? JSON.stringify(data) : undefined;
+  return request<T>(path, {
+    ...options,
+    method: "POST",
+    body,
+  });
+};
+
+request.put = <T = unknown>(path: string, data?: any, options: RequestInit = {}): Promise<T> => {
+  const body = data ? JSON.stringify(data) : undefined;
+  return request<T>(path, {
+    ...options,
+    method: "PUT",
+    body,
+  });
+};
+
+request.delete = <T = unknown>(path: string, options: RequestInit = {}): Promise<T> => {
+  return request<T>(path, { ...options, method: "DELETE" });
+};
+
+export { request };

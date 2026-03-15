@@ -5,6 +5,243 @@
     <link rel="icon" type="image/svg+xml" href="/copaw-symbol.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CoPaw Console</title>
+    <style>
+      /* Dark Mode Button Shadow Fix - Remove white offset shadow */
+      /* Base button - remove all shadows */
+      :root[data-theme='dark'] button.ant-btn {
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+      
+      /* Primary buttons - dark shadow only */
+      :root[data-theme='dark'] button.ant-btn-primary,
+      :root[data-theme='dark'] .ant-btn-color-primary,
+      :root[data-theme='dark'] [class*='-btn-color-primary'] {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35) !important;
+      }
+      :root[data-theme='dark'] button.ant-btn-primary:hover,
+      :root[data-theme='dark'] .ant-btn-color-primary:hover,
+      :root[data-theme='dark'] [class*='-btn-color-primary']:hover {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3) !important;
+      }
+      :root[data-theme='dark'] button.ant-btn-primary:active,
+      :root[data-theme='dark'] .ant-btn-color-primary:active,
+      :root[data-theme='dark'] [class*='-btn-color-primary']:active {
+        box-shadow: none !important;
+      }
+      
+      /* Default buttons - dark shadow only */
+      :root[data-theme='dark'] button.ant-btn-default,
+      :root[data-theme='dark'] .ant-btn-color-default,
+      :root[data-theme='dark'] [class*='-btn-color-default'] {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25) !important;
+      }
+      :root[data-theme='dark'] button.ant-btn-default:hover,
+      :root[data-theme='dark'] .ant-btn-color-default:hover,
+      :root[data-theme='dark'] [class*='-btn-color-default']:hover {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) !important;
+      }
+      
+      /* Dashed buttons - same as default */
+      :root[data-theme='dark'] button.ant-btn-dashed,
+      :root[data-theme='dark'] .ant-btn-color-dashed,
+      :root[data-theme='dark'] [class*='-btn-color-dashed'] {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25) !important;
+      }
+      :root[data-theme='dark'] button.ant-btn-dashed:hover,
+      :root[data-theme='dark'] .ant-btn-color-dashed:hover,
+      :root[data-theme='dark'] [class*='-btn-color-dashed']:hover {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) !important;
+      }
+      
+      /* Text/Link buttons - no shadow */
+      :root[data-theme='dark'] button.ant-btn-text,
+      :root[data-theme='dark'] button.ant-btn-link,
+      :root[data-theme='dark'] .ant-btn-color-link,
+      :root[data-theme='dark'] .ant-btn-color-text,
+      :root[data-theme='dark'] [class*='-btn-color-link'],
+      :root[data-theme='dark'] [class*='-btn-color-text'] {
+        box-shadow: none !important;
+      }
+      
+      /* Danger buttons - dark shadow */
+      :root[data-theme='dark'] button.ant-btn-danger,
+      :root[data-theme='dark'] button.ant-btn-dangerous,
+      :root[data-theme='dark'] .ant-btn-color-danger,
+      :root[data-theme='dark'] .ant-btn-dangerous,
+      :root[data-theme='dark'] [class*='-btn-color-danger'],
+      :root[data-theme='dark'] [class*='-btn-dangerous'] {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35) !important;
+      }
+      :root[data-theme='dark'] button.ant-btn-danger:hover,
+      :root[data-theme='dark'] button.ant-btn-dangerous:hover,
+      :root[data-theme='dark'] .ant-btn-color-danger:hover,
+      :root[data-theme='dark'] .ant-btn-dangerous:hover,
+      :root[data-theme='dark'] [class*='-btn-color-danger']:hover,
+      :root[data-theme='dark'] [class*='-btn-dangerous']:hover {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3) !important;
+      }
+      
+      /* Remove any white/light transform offset from pseudo elements */
+      :root[data-theme='dark'] .ant-btn::before,
+      :root[data-theme='dark'] .ant-btn::after {
+        box-shadow: none !important;
+      }
+      
+      /* Universal fallback - catch any remaining button shadows */
+      :root[data-theme='dark'] button[class*='ant-btn'],
+      :root[data-theme='dark'] button[class*='-btn'] {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25) !important;
+      }
+      :root[data-theme='dark'] button[class*='ant-btn-text'],
+      :root[data-theme='dark'] button[class*='ant-btn-link'],
+      :root[data-theme='dark'] button[class*='-btn-text'],
+      :root[data-theme='dark'] button[class*='-btn-link'] {
+        box-shadow: none !important;
+      }
+
+      /* ===== Drawer Dark Mode Fixes ===== */
+      /* Drawer content wrapper - ensure proper dark background */
+      :root[data-theme='dark'] .ant-drawer-content-wrapper,
+      :root[data-theme='dark'] .copaw-drawer-content-wrapper {
+        background-color: var(--theme-bg-elevated, #262626) !important;
+      }
+      :root[data-theme='dark'] .ant-drawer-content,
+      :root[data-theme='dark'] .copaw-drawer-content {
+        background-color: var(--theme-bg-elevated, #262626) !important;
+      }
+      :root[data-theme='dark'] .ant-drawer-body,
+      :root[data-theme='dark'] .copaw-drawer-body {
+        background-color: var(--theme-bg-elevated, #262626) !important;
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .ant-drawer-header,
+      :root[data-theme='dark'] .copaw-drawer-header {
+        background-color: var(--theme-bg-secondary, #141414) !important;
+        border-bottom-color: var(--theme-border-primary, rgba(255, 255, 255, 0.12)) !important;
+      }
+      :root[data-theme='dark'] .ant-drawer-title,
+      :root[data-theme='dark'] .copaw-drawer-title {
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .ant-drawer-footer,
+      :root[data-theme='dark'] .copaw-drawer-footer {
+        background-color: var(--theme-bg-secondary, #141414) !important;
+        border-top-color: var(--theme-border-primary, rgba(255, 255, 255, 0.12)) !important;
+      }
+
+      /* ===== Input Outlined Dark Mode Fixes ===== */
+      /* Fix for copaw-input-outlined border color in dark mode */
+      :root[data-theme='dark'] .copaw-input-outlined,
+      :root[data-theme='dark'] .copaw-input-outlined.copaw-input-disabled,
+      :root[data-theme='dark'] .copaw-input-outlined[disabled] {
+        border-color: var(--theme-border-secondary, rgba(255, 255, 255, 0.08)) !important;
+        background-color: var(--theme-input-bg, #141414) !important;
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .copaw-input-outlined:hover {
+        border-color: var(--theme-input-hover-border, rgba(255, 255, 255, 0.3)) !important;
+      }
+      :root[data-theme='dark'] .copaw-input-outlined:focus,
+      :root[data-theme='dark'] .copaw-input-outlined-focused {
+        border-color: var(--theme-input-active-border, #177ddc) !important;
+      }
+      :root[data-theme='dark'] .copaw-input-outlined::placeholder {
+        color: var(--theme-text-disabled, rgba(255, 255, 255, 0.25)) !important;
+      }
+
+      /* ===== Markdown Preview Dark Mode Fixes ===== */
+      /* Fix for @ant-design/x-markdown in dark mode */
+      :root[data-theme='dark'] .x-markdown {
+        --text-color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+        --font-size: inherit;
+      }
+      :root[data-theme='dark'] .x-markdown code {
+        background-color: var(--theme-bg-tertiary, #1f1f1f) !important;
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+        border: 1px solid var(--theme-border-secondary, rgba(255, 255, 255, 0.08)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown pre {
+        background-color: var(--theme-bg-secondary, #141414) !important;
+        border: 1px solid var(--theme-border-primary, rgba(255, 255, 255, 0.12)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown pre code {
+        background-color: transparent !important;
+        border: none !important;
+      }
+      :root[data-theme='dark'] .x-markdown p,
+      :root[data-theme='dark'] .x-markdown li,
+      :root[data-theme='dark'] .x-markdown span {
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown strong {
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown a {
+        color: var(--theme-primary, #177ddc) !important;
+      }
+      :root[data-theme='dark'] .x-markdown h1,
+      :root[data-theme='dark'] .x-markdown h2,
+      :root[data-theme='dark'] .x-markdown h3,
+      :root[data-theme='dark'] .x-markdown h4,
+      :root[data-theme='dark'] .x-markdown h5,
+      :root[data-theme='dark'] .x-markdown h6 {
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown table {
+        background-color: var(--theme-bg-container, #1f1f1f) !important;
+      }
+      :root[data-theme='dark'] .x-markdown table th,
+      :root[data-theme='dark'] .x-markdown table td {
+        border-color: var(--theme-border-secondary, rgba(255, 255, 255, 0.08)) !important;
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown table th {
+        background-color: var(--theme-bg-secondary, #141414) !important;
+      }
+      :root[data-theme='dark'] .x-markdown blockquote {
+        border-left-color: var(--theme-border-primary, rgba(255, 255, 255, 0.12)) !important;
+        color: var(--theme-text-secondary, rgba(255, 255, 255, 0.65)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown hr {
+        border-color: var(--theme-border-primary, rgba(255, 255, 255, 0.12)) !important;
+      }
+
+      /* ===== MarkdownCopy Component Dark Mode ===== */
+      :root[data-theme='dark'] .markdownViewer {
+        background-color: var(--theme-bg-container, #1f1f1f) !important;
+        border-color: var(--theme-border-secondary, rgba(255, 255, 255, 0.08)) !important;
+      }
+      :root[data-theme='dark'] .textarea {
+        background-color: var(--theme-bg-container, #1f1f1f) !important;
+        border-color: var(--theme-border-secondary, rgba(255, 255, 255, 0.08)) !important;
+        color: var(--theme-text-primary, rgba(255, 255, 255, 0.85)) !important;
+      }
+
+      /* ===== XMarkdown Inline Style Override for Dark Mode ===== */
+      /* Override the hardcoded white background in MarkdownCopy component */
+      :root[data-theme='dark'] div[style*="background-color: rgb(255, 255, 255)"],
+      :root[data-theme='dark'] div[style*="background-color: #fff"],
+      :root[data-theme='dark'] div[style*="background-color:#fff"] {
+        background-color: var(--theme-bg-container, #1f1f1f) !important;
+      }
+      :root[data-theme='dark'] .x-markdown > div[style],
+      :root[data-theme='dark'] .markdownViewer > div {
+        background-color: var(--theme-bg-container, #1f1f1f) !important;
+      }
+
+      /* ===== Additional XMarkdown Elements ===== */
+      :root[data-theme='dark'] .x-markdown em {
+        color: var(--theme-text-secondary, rgba(255, 255, 255, 0.65)) !important;
+      }
+      :root[data-theme='dark'] .x-markdown img {
+        opacity: 0.9;
+      }
+      :root[data-theme='dark'] .x-markdown code::before,
+      :root[data-theme='dark'] .x-markdown code::after {
+        content: none !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

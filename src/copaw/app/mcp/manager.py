@@ -176,10 +176,58 @@ class MCPClientManager:
             client_config: Client configuration
             timeout: Connection timeout in seconds (default 60s)
         """
+        # Auto-check dependencies for stdio clients
+        if client_config.transport == "stdio" and client_config.command:
+            try:
+                from ...cli.mcp_deps_installer import MCPDependencyInstaller
+                installer = MCPDependencyInstaller(auto_confirm=False, dry_run=False)
+
+                # Quick check without prompting (just detect missing tools)
+                tool = installer.detect_command_tool(client_config.command)
+                is_installed = await installer.check_tool_installed(tool)
+
+                if not is_installed:
+                    logger.warning(
+                        f"MCP client '{key}' requires '{tool.value}' which is not installed. "
+                        f"Run 'copaw mcp install-deps {key}' to install dependencies."
+                    )
+            except Exception as e:
+                logger.debug(f"Dependency check failed for '{key}': {e}")
+
         client = self._build_client(client_config)
 
         # Add timeout to prevent indefinite blocking
-        await asyncio.wait_for(client.connect(), timeout=timeout)
+        try:
+            await asyncio.wait_for(client.connect(), timeout=timeout)
+        except asyncio.TimeoutError:
+            logger.error(
+                f"Timeout connecting MCP client '{key}' after {timeout}s. "
+                f"URL: {client_config.url}, Transport: {client_config.transport}"
+            )
+            raise
+        except Exception as e:
+            # Add more context to the error
+            error_type = type(e).__name__
+            error_msg = str(e)
+
+            logger.error(
+                f"Failed to connect MCP client '{key}':\n"
+                f"  Error Type: {error_type}\n"
+                f"  Error Message: {error_msg}\n"
+                f"  URL: {client_config.url}\n"
+                f"  Transport: {client_config.transport}\n"
+                f"  Name: {client_config.name}\n"
+                f"\n"
+                f"Possible causes:\n"
+                f"  • Remote server is not running\n"
+                f"  • Wrong URL or port\n"
+                f"  • MCP protocol version mismatch\n"
+                f"  • Server rejected the connection (authentication/config error)\n"
+                f"  • Network/firewall issues\n"
+                f"\n"
+                f"Try running: python -m copaw.cli.mcp_diagnose {key}"
+            )
+            raise
 
         async with self._lock:
             self._clients[key] = client
@@ -208,6 +256,15 @@ class MCPClientManager:
             )
             setattr(client, "_copaw_rebuild_info", rebuild_info)
             return client
+
+        # For remote clients, add more detailed logging
+        logger.debug(
+            f"Building remote MCP client:\n"
+            f"  Name: {client_config.name}\n"
+            f"  Transport: {client_config.transport}\n"
+            f"  URL: {client_config.url}\n"
+            f"  Headers: {client_config.headers or 'none'}"
+        )
 
         client = HttpStatefulClient(
             name=client_config.name,

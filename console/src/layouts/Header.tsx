@@ -1,13 +1,18 @@
-import { Layout, Space } from "antd";
+import { Layout, Space, Dropdown, Avatar } from "antd";
+import type { MenuProps } from "antd";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import {
   FileTextOutlined,
   BookOutlined,
   QuestionCircleOutlined,
   GithubOutlined,
+  UserOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { Button, Tooltip } from "@agentscope-ai/design";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./index.module.less";
 
 const { Header: AntHeader } = Layout;
@@ -40,12 +45,27 @@ interface HeaderProps {
 
 export default function Header({ selectedKey }: HeaderProps) {
   const { t } = useTranslation();
+  const { user, authEnabled, logout } = useAuth();
 
   const handleNavClick = (url: string) => {
     if (url) {
       window.open(url, "_blank");
     }
   };
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = "/login";
+  };
+
+  const userMenuItems: MenuProps["items"] = [
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: t("auth.logout") || "Logout",
+      onClick: handleLogout,
+    },
+  ];
 
   return (
     <AntHeader className={styles.header}>
@@ -89,7 +109,20 @@ export default function Header({ selectedKey }: HeaderProps) {
             {t("header.github")}
           </Button>
         </Tooltip>
+        <ThemeToggle placement="bottom" />
         <LanguageSwitcher />
+        {authEnabled && user && (
+          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+            <Space style={{ cursor: "pointer" }}>
+              <Avatar
+                size="small"
+                icon={<UserOutlined />}
+                style={{ backgroundColor: "#1890ff" }}
+              />
+              <span className={styles.username}>{user.username}</span>
+            </Space>
+          </Dropdown>
+        )}
       </Space>
     </AntHeader>
   );

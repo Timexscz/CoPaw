@@ -7,6 +7,7 @@
     "delete": "删除",
     "edit": "编辑",
     "create": "创建",
+    "cannotDeleteBuiltIn": "内置技能无法删除，只能禁用",
     "upload": "上传",
     "download": "下载",
     "refresh": "刷新",
@@ -85,7 +86,8 @@
     "frontmatterDescriptionRequired": "Skills 中缺少必填字段：description",
     "editNotSupported": "后端API不支持编辑操作",
     "editNote": "注意：后端API不支持编辑技能。您只能查看或切换启用/禁用状态。",
-    "create": "创建"
+    "create": "创建",
+    "cannotDeleteBuiltIn": "内置技能无法删除，只能禁用"
   },
   "mcp": {
     "title": "MCP 客户端",
@@ -489,5 +491,46 @@
       "viewReleases": "查看 Releases",
       "close": "关闭"
     }
+  },
+  "theme": {
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  },
+  "settings": {
+    "language": "语言",
+    "theme": "主题"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "username": "用户名",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "usernamePlaceholder": "请输入用户名",
+    "passwordPlaceholder": "请输入密码",
+    "confirmPasswordPlaceholder": "请确认密码",
+    "usernameRequired": "请输入用户名！",
+    "passwordRequired": "请输入密码！",
+    "confirmPasswordRequired": "请确认密码！",
+    "usernameMin": "用户名至少 3 个字符",
+    "passwordMin": "密码至少 6 个字符",
+    "passwordMismatch": "两次输入的密码不一致！",
+    "loginSuccess": "登录成功！",
+    "loginFailed": "登录失败，请检查您的凭据。",
+    "registerSuccess": "注册成功！",
+    "registerFailed": "注册失败，请重试。",
+    "usernameExists": "用户名已存在",
+    "noAccount": "还没有账号？",
+    "hasAccount": "已有账号？",
+    "signUp": "注册",
+    "signIn": "登录",
+    "welcomeTitle": "欢迎使用 CoPaw",
+    "welcomeSubtitle": "请登录以继续",
+    "createTitle": "创建账号",
+    "createSubtitle": "注册以开始使用 CoPaw",
+    "usernameLengthHint": "用户名（3-100 个字符）",
+    "passwordLengthHint": "密码（至少 6 个字符）"
   }
 }

@@ -1,9 +1,42 @@
-import {
-  IAgentScopeRuntimeWebUISession,
-  IAgentScopeRuntimeWebUISessionAPI,
-  IAgentScopeRuntimeWebUIMessage,
-} from "@agentscope-ai/chat";
+/**
+ * Session API for AgentScopeRuntimeWebUI
+ * 
+ * NOTE: This file is currently not used as we migrated to a placeholder component.
+ * The AgentScopeRuntimeWebUI was removed from @agentscope-ai/chat in newer versions.
+ * This code is kept for reference when migrating to the new ChatAnywhere API.
+ */
+
 import api, { type ChatSpec, type Message } from "../../../api";
+
+// Type definitions for AgentScopeRuntimeWebUI
+interface IAgentScopeRuntimeWebUISession {
+  id: string;
+  name: string;
+  messages: any[];
+  [key: string]: any;
+}
+
+interface IAgentScopeRuntimeWebUISessionAPI {
+  getSessionList(): Promise<IAgentScopeRuntimeWebUISession[]>;
+  getSession(sessionId: string): Promise<IAgentScopeRuntimeWebUISession>;
+  updateSession(
+    session: Partial<IAgentScopeRuntimeWebUISession>,
+  ): Promise<IAgentScopeRuntimeWebUISession[]>;
+  createSession(
+    session: Partial<IAgentScopeRuntimeWebUISession>,
+  ): Promise<IAgentScopeRuntimeWebUISession[]>;
+  removeSession(
+    session: Partial<IAgentScopeRuntimeWebUISession>,
+  ): Promise<IAgentScopeRuntimeWebUISession[]>;
+}
+
+interface IAgentScopeRuntimeWebUIMessage {
+  id: string;
+  role: string;
+  cards?: any[];
+  msgStatus?: string;
+  [key: string]: any;
+}
 
 interface CustomWindow extends Window {
   currentSessionId?: string;

@@ -487,5 +487,46 @@
       "viewReleases": "リリースを見る",
       "close": "閉じる"
     }
+  },
+  "theme": {
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "system": "システム"
+  },
+  "settings": {
+    "language": "言語",
+    "theme": "テーマ"
+  },
+  "auth": {
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "confirmPassword": "パスワードの確認",
+    "usernamePlaceholder": "ユーザー名を入力してください",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "confirmPasswordPlaceholder": "パスワードを再入力してください",
+    "usernameRequired": "ユーザー名を入力してください！",
+    "passwordRequired": "パスワードを入力してください！",
+    "confirmPasswordRequired": "パスワードの確認を入力してください！",
+    "usernameMin": "ユーザー名は最低 3 文字必要です",
+    "passwordMin": "パスワードは最低 6 文字必要です",
+    "passwordMismatch": "パスワードが一致しません！",
+    "loginSuccess": "ログイン成功！",
+    "loginFailed": "ログインに失敗しました。認証情報を確認してください。",
+    "registerSuccess": "登録成功！",
+    "registerFailed": "登録に失敗しました。もう一度お試しください。",
+    "usernameExists": "ユーザー名は既に存在しています",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "既にアカウントをお持ちですか？",
+    "signUp": "登録",
+    "signIn": "ログイン",
+    "welcomeTitle": "CoPaw へようこそ",
+    "welcomeSubtitle": "続行するにはログインしてください",
+    "createTitle": "アカウントを作成",
+    "createSubtitle": "CoPaw を始めるには登録してください",
+    "usernameLengthHint": "ユーザー名（3-100 文字）",
+    "passwordLengthHint": "パスワード（最低 6 文字）"
   }
 }
