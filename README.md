@@ -31,7 +31,7 @@
 
 **[2026-03-14] v0.0.6.ce.1 发布**
 
-这是 CoPaw 的社区增强版本，包含以下改进：
+这是 CoPaw 的社区增强版本，包含以下改进（本版本包含超过600，000行新增代码，由人-Ai协作完成（主要感谢qwen-coding-planning））：
 
 ### 新增功能
 - 🔐 **完整的认证系统** - JWT 认证，保护 API 访问（可选启用）
@@ -964,10 +964,10 @@ CoPaw = **Co** Personal **Paw** Assistant Workstation
 ## 许可证
 
 Apache 2.0 License - 与官方 CoPaw 保持一致。
-
+免责声明：本项目并非Copaw Development Team 得官方产品，未获得其背书或支持。如有问题请联系本人。
 ---
 
-## 社区与联系
+## 官方社区与联系
 
 | 平台 | 链接 |
 |------|------|
@@ -980,8 +980,9 @@ Apache 2.0 License - 与官方 CoPaw 保持一致。
 
 <div align="center">
 
-**CoPaw-CE v0.0.6.ce.1** | 基于 CoPaw v0.0.5.post1
+**CoPaw-CE v0.0.6.ce.1** | 基于 CoPaw v0.0.5.post1 | 当前维护者：Timexscz | 本人邮箱：timexscz@qq.com
 
 [返回顶部](#-社区增强版)
 
 </div>
+>
