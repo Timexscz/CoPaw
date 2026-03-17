@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025 The CoPaw Authors
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 """Ollama model management using the Ollama Python SDK.
 
 This module mirrors the structure of local_models.manager, but delegates all

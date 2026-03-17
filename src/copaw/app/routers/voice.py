@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025 The CoPaw Authors
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 """Voice channel router.
 
 Exports ``voice_router`` with Twilio-facing endpoints mounted at the app root:

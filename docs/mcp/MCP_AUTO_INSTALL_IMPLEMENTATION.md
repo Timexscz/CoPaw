@@ -277,4 +277,4 @@ Installation instructions:
 
 **实现日期**: 2026-03-12
 **版本**: v0.0.6
-**作者**: CoPaw Team
+**作者**: Timexscz

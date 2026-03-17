@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025 The CoPaw Authors
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 # pylint: disable=too-many-branches,too-many-statements
 """
 Pluggable message renderer: Message -> sendable parts (runtime Content).

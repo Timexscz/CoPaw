@@ -444,5 +444,5 @@ psql -h localhost -U copaw -d copaw -c \
 - FIX_SUMMARY.md
 - DATABASE_CONFIG.md
 
-**整合完成**: 2026-03-14  
-**维护者**: CoPaw Development Team
+**整合完成**: 2026-03-14
+**维护者**: Timexscz

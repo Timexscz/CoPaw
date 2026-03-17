@@ -370,5 +370,5 @@ copaw mcp install-deps <client>
 - MCP_DEPS_QUICK_REFERENCE.md
 - MCP_REMOTE_DIAGNOSIS_GUIDE.md
 
-**整合完成**: 2026-03-14  
-**维护者**: CoPaw Development Team
+**整合完成**: 2026-03-14
+**维护者**: Timexscz

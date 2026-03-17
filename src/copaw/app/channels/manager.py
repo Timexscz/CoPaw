@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025 The CoPaw Authors
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 # pylint: disable=protected-access
 # ChannelManager is the framework owner of BaseChannel and must call
 # _is_native_payload and _consume_one_request as part of the contract.

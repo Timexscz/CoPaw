@@ -316,5 +316,5 @@ const current = themeManager.getTheme(); // 'light' | 'dark' | 'system'
 - THEME_FIX_SUMMARY.md
 - THEME_FINAL_FIX.md
 
-**整合完成**: 2026-03-14  
-**维护者**: CoPaw Development Team
+**整合完成**: 2026-03-14
+**维护者**: Timexscz

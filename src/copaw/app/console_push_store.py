@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025 The CoPaw Authors
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 """In-memory store for console channel push messages (e.g. cron text).
 
 Bounded: at most _MAX_MESSAGES kept; messages older than _MAX_AGE_SECONDS

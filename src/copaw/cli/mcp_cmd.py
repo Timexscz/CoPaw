@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 """CLI command: manage MCP clients."""
 from __future__ import annotations
 

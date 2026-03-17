@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# Copyright 2025-2026 Timexscz (CoPaw-CE Community Edition)
+# SPDX-License-Identifier: Apache-2.0
 """Repositories for data access."""
 
 from .category_repo import CategoryRepository, CategoryModel

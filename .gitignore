@@ -101,6 +101,7 @@ Desktop.ini
 __pycache__/
 *.py[cod]
 *$py.class
+add_dual_copyright.py
 
 # =============================================================================
 # Vibe Coding / AI Assistants
